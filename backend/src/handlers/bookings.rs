@@ -154,6 +154,11 @@ pub async fn create_booking(
         .fetch_one(pool.get_ref())
         .await?;
 
+    // Werte für Response klonen, bevor sie in den Spawn verschoben werden
+    let response_booking = booking.clone();
+    let reise_titel = trip.titel.clone();
+    let reise_ziel = trip.ziel.clone();
+
     // Bestätigungs-E-Mail senden
     let email_service = email_service.clone();
     tokio::spawn(async move {
@@ -162,9 +167,9 @@ pub async fn create_booking(
         }
     });
 
-    let mut response = BookingResponse::from(booking);
-    response.reise_titel = Some(trip.titel);
-    response.reise_ziel = Some(trip.ziel);
+    let mut response = BookingResponse::from(response_booking);
+    response.reise_titel = Some(reise_titel);
+    response.reise_ziel = Some(reise_ziel);
 
     Ok(HttpResponse::Created().json(response))
 }

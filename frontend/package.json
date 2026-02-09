@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.8.0",
-    "@tauri-apps/cli": "^2.0.0",
+    "@tauri-apps/cli": "^2.10.0",
     "@tsconfig/node20": "^20.1.2",
     "@types/node": "^20.11.24",
     "@vitejs/plugin-vue": "^5.0.4",

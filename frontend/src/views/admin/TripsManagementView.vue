@@ -1,18 +1,15 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
 import { adminApi } from '@/api'
 import { useToast } from 'vue-toastification'
 import type { Trip } from '@/types'
 
-const router = useRouter()
 const toast = useToast()
 
 const trips = ref<Trip[]>([])
 const loading = ref(true)
 const currentPage = ref(1)
 const totalPages = ref(1)
-const searchQuery = ref('')
 const deleteModal = ref<{ show: boolean; trip: Trip | null }>({ show: false, trip: null })
 const deleting = ref(false)
 

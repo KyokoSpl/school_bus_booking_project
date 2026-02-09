@@ -8,7 +8,6 @@ const authStore = useAuthStore()
 const toast = useToast()
 
 const activeTab = ref<'profile' | 'password'>('profile')
-const loading = ref(false)
 const savingProfile = ref(false)
 const savingPassword = ref(false)
 

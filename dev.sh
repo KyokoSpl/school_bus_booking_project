@@ -147,14 +147,38 @@ start_backend() {
     echo ""
     echo -e "${YELLOW}Starte Backend (Rust/Actix-Web)...${NC}"
     
+    # Beende vorherige Backend-Instanzen auf Port 8080
+    local existing_pid
+    existing_pid=$(lsof -ti :8080 2>/dev/null || true)
+    if [ -n "$existing_pid" ]; then
+        echo -e "${YELLOW}Beende vorherige Instanz auf Port 8080 (PID: $existing_pid)...${NC}"
+        kill -9 $existing_pid 2>/dev/null || true
+        sleep 1
+    fi
+    
     cd "$PROJECT_DIR/backend"
     cargo run &
     BACKEND_PID=$!
     
-    # Warte kurz und prüfe ob Backend läuft
-    sleep 3
-    if ! kill -0 $BACKEND_PID 2>/dev/null; then
-        echo -e "${RED}✗ Backend konnte nicht gestartet werden${NC}"
+    # Warte bis Backend auf Port 8080 lauscht (max 120 Sekunden)
+    echo -e "${YELLOW}Warte auf Backend-Start...${NC}"
+    local max_attempts=60
+    local attempt=1
+    while [ $attempt -le $max_attempts ]; do
+        if ! kill -0 $BACKEND_PID 2>/dev/null; then
+            echo -e "${RED}✗ Backend-Prozess wurde unerwartet beendet${NC}"
+            exit 1
+        fi
+        if ss -tlnp 2>/dev/null | grep -q ':8080'; then
+            break
+        fi
+        sleep 2
+        ((attempt++))
+    done
+    
+    if [ $attempt -gt $max_attempts ]; then
+        echo -e "${RED}✗ Backend Timeout - konnte nicht gestartet werden${NC}"
+        kill $BACKEND_PID 2>/dev/null || true
         exit 1
     fi
     
@@ -194,6 +218,10 @@ main() {
     echo -e "${GREEN}║  Admin-Login:                                             ║${NC}"
     echo -e "${GREEN}║    E-Mail:    admin@sonnenschein-reisen.de                ║${NC}"
     echo -e "${GREEN}║    Passwort:  Admin123!                                   ║${NC}"
+    echo -e "${GREEN}║                                                           ║${NC}"
+    echo -e "${GREEN}║  Kunde-Login:                                             ║${NC}"
+    echo -e "${GREEN}║    E-Mail:    max.mustermann@example.de                   ║${NC}"
+    echo -e "${GREEN}║    Passwort:  Kunde123!                                   ║${NC}"
     echo -e "${GREEN}╠═══════════════════════════════════════════════════════════╣${NC}"
     echo -e "${GREEN}║  Drücke ${YELLOW}Ctrl+C${GREEN} zum Beenden                              ║${NC}"
     echo -e "${GREEN}╚═══════════════════════════════════════════════════════════╝${NC}"

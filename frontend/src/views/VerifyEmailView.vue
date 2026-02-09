@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 import { authApi } from '@/api'
 import { useToast } from 'vue-toastification'
 
 const route = useRoute()
-const router = useRouter()
 const toast = useToast()
 
 const loading = ref(true)

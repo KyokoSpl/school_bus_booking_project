@@ -1,10 +1,10 @@
 -- Admin-Benutzer (Passwort: Admin123!)
 -- Hash generiert mit Argon2
-INSERT INTO users (id, email, password_hash, vorname, nachname, rolle, email_verifiziert, aktiv)
+INSERT IGNORE INTO users (id, email, password_hash, vorname, nachname, rolle, email_verifiziert, aktiv)
 VALUES (
     'a0000000-0000-0000-0000-000000000001',
     'admin@sonnenschein-reisen.de',
-    '$argon2id$v=19$m=19456,t=2,p=1$YWRtaW5zYWx0MTIzNDU$hVwK2l+3HqzU8qKkFGl8Wv8nh8h3Kx0vQ9uE2Y5nF7k',
+    '$argon2id$v=19$m=19456,t=2,p=1$NF9aeZdhzjMJjYwKeAsUNQ$DsCNPRnAFbkxoubOzFO4yPaamf1R3TY6ccOVrlFaAZo',
     'System',
     'Administrator',
     'admin',
@@ -13,13 +13,13 @@ VALUES (
 );
 
 -- Beispiel-Busse
-INSERT INTO buses (id, kennzeichen, bezeichnung, sitzplaetze, ausstattung, baujahr, status) VALUES
+INSERT IGNORE INTO buses (id, kennzeichen, bezeichnung, sitzplaetze, ausstattung, baujahr, status) VALUES
 ('b0000000-0000-0000-0000-000000000001', 'SR-BUS-001', 'Mercedes Tourismo', 50, '["Klimaanlage", "WC", "WLAN", "Steckdosen", "Kühlschrank"]', 2022, 'verfuegbar'),
 ('b0000000-0000-0000-0000-000000000002', 'SR-BUS-002', 'Setra ComfortClass', 48, '["Klimaanlage", "WC", "WLAN", "Steckdosen", "TV"]', 2021, 'verfuegbar'),
 ('b0000000-0000-0000-0000-000000000003', 'SR-BUS-003', 'MAN Lions Coach', 52, '["Klimaanlage", "WC", "WLAN", "Steckdosen"]', 2020, 'verfuegbar');
 
 -- Beispiel-Reisen
-INSERT INTO trips (id, titel, beschreibung, ziel, abfahrtsort, abfahrt_datum, abfahrt_zeit, rueckkehr_datum, rueckkehr_zeit, preis_pro_person, bus_id, max_teilnehmer, aktuelle_buchungen, status, highlights, inkludiert, nicht_inkludiert) VALUES
+INSERT IGNORE INTO trips (id, titel, beschreibung, ziel, abfahrtsort, abfahrt_datum, abfahrt_zeit, rueckkehr_datum, rueckkehr_zeit, preis_pro_person, bus_id, max_teilnehmer, aktuelle_buchungen, status, highlights, inkludiert, nicht_inkludiert) VALUES
 (
     't0000000-0000-0000-0000-000000000001',
     'Paris - Stadt der Liebe',
@@ -117,11 +117,11 @@ INSERT INTO trips (id, titel, beschreibung, ziel, abfahrtsort, abfahrt_datum, ab
 );
 
 -- Beispiel-Kunde (Passwort: Kunde123!)
-INSERT INTO users (id, email, password_hash, vorname, nachname, telefon, strasse, plz, ort, rolle, email_verifiziert, aktiv)
+INSERT IGNORE INTO users (id, email, password_hash, vorname, nachname, telefon, strasse, plz, ort, rolle, email_verifiziert, aktiv)
 VALUES (
     'u0000000-0000-0000-0000-000000000001',
     'max.mustermann@example.de',
-    '$argon2id$v=19$m=19456,t=2,p=1$a3VuZGVzYWx0MTIzNDU$dGVzdGhhc2hrdW5kZTEyMzQ1Njc4OTAxMjM0NTY3ODkw',
+    '$argon2id$v=19$m=19456,t=2,p=1$8UmtzdabWSiezYvArCHCqA$FI1hd4Sxah0D2l8wpu50fIlKwvkjiId4MIYPsh5gbwg',
     'Max',
     'Mustermann',
     '+49 170 1234567',

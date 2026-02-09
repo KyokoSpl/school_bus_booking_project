@@ -157,30 +157,56 @@ function formatPrice(price: number) {
     <template v-else-if="trip">
       <!-- Progress Steps -->
       <div class="max-w-3xl mx-auto mb-8">
-        <div class="flex items-center justify-between">
-          <div v-for="i in 3" :key="i" class="flex-1 flex items-center">
+        <div class="flex items-start">
+          <!-- Step 1 -->
+          <div class="flex flex-col items-center">
             <div
               class="w-10 h-10 rounded-full flex items-center justify-center font-bold"
-              :class="step >= i ? 'bg-primary-600 text-white' : 'bg-gray-200 text-gray-600'"
+              :class="step >= 1 ? 'bg-primary-600 text-white' : 'bg-gray-200 text-gray-600'"
             >
-              <svg v-if="step > i" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg v-if="step > 1" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
-              <span v-else>{{ i }}</span>
+              <span v-else>1</span>
             </div>
-            <div v-if="i < 3" class="flex-1 h-1 mx-2" :class="step > i ? 'bg-primary-600' : 'bg-gray-200'"></div>
+            <span class="mt-2 text-sm" :class="step >= 1 ? 'text-primary-600 font-medium' : 'text-gray-500'">Teilnehmer</span>
           </div>
-        </div>
-        <div class="flex justify-between mt-2 text-sm">
-          <span :class="step >= 1 ? 'text-primary-600 font-medium' : 'text-gray-500'">Teilnehmer</span>
-          <span :class="step >= 2 ? 'text-primary-600 font-medium' : 'text-gray-500'">Zahlung</span>
-          <span :class="step >= 3 ? 'text-primary-600 font-medium' : 'text-gray-500'">Bestätigung</span>
+          <!-- Line 1-2 -->
+          <div class="flex-1 h-1 mt-5 mx-2" :class="step > 1 ? 'bg-primary-600' : 'bg-gray-200'"></div>
+          <!-- Step 2 -->
+          <div class="flex flex-col items-center">
+            <div
+              class="w-10 h-10 rounded-full flex items-center justify-center font-bold"
+              :class="step >= 2 ? 'bg-primary-600 text-white' : 'bg-gray-200 text-gray-600'"
+            >
+              <svg v-if="step > 2" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span v-else>2</span>
+            </div>
+            <span class="mt-2 text-sm" :class="step >= 2 ? 'text-primary-600 font-medium' : 'text-gray-500'">Zahlung</span>
+          </div>
+          <!-- Line 2-3 -->
+          <div class="flex-1 h-1 mt-5 mx-2" :class="step > 2 ? 'bg-primary-600' : 'bg-gray-200'"></div>
+          <!-- Step 3 -->
+          <div class="flex flex-col items-center">
+            <div
+              class="w-10 h-10 rounded-full flex items-center justify-center font-bold"
+              :class="step >= 3 ? 'bg-primary-600 text-white' : 'bg-gray-200 text-gray-600'"
+            >
+              <svg v-if="step > 3" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span v-else>3</span>
+            </div>
+            <span class="mt-2 text-sm" :class="step >= 3 ? 'text-primary-600 font-medium' : 'text-gray-500'">Bestätigung</span>
+          </div>
         </div>
       </div>
 
       <div class="grid lg:grid-cols-3 gap-8">
         <!-- Main Form -->
-        <div class="lg:col-span-2">
+        <div :class="step === 4 ? 'lg:col-span-3' : 'lg:col-span-2'">
           <!-- Step 1: Travelers -->
           <div v-if="step === 1" class="card p-6">
             <h2 class="text-2xl font-bold mb-6">Teilnehmer</h2>
