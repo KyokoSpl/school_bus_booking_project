@@ -27,7 +27,7 @@ const menuItems = [
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-100">
+  <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
     <!-- Mobile sidebar backdrop -->
     <div
       v-if="sidebarOpen"
@@ -38,7 +38,7 @@ const menuItems = [
     <!-- Sidebar -->
     <aside
       :class="[
-        'fixed inset-y-0 left-0 z-50 w-64 bg-gray-900 text-white transform transition-transform duration-300 lg:translate-x-0',
+        'fixed inset-y-0 left-0 z-50 w-64 bg-gray-900 dark:bg-gray-950 text-white transform transition-transform duration-300 lg:translate-x-0',
         sidebarOpen ? 'translate-x-0' : '-translate-x-full'
       ]"
     >
@@ -94,14 +94,14 @@ const menuItems = [
     <!-- Main content -->
     <div class="lg:pl-64">
       <!-- Top bar -->
-      <header class="sticky top-0 z-30 bg-white border-b shadow-sm">
+      <header class="sticky top-0 z-30 bg-white dark:bg-gray-800 border-b dark:border-gray-700 shadow-sm dark:shadow-gray-900/50">
         <div class="flex items-center justify-between px-4 py-3">
-          <button @click="sidebarOpen = true" class="lg:hidden text-gray-600 hover:text-gray-900">
+          <button @click="sidebarOpen = true" class="lg:hidden text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
-          <h1 class="text-xl font-semibold text-gray-800 lg:pl-0">
+          <h1 class="text-xl font-semibold text-gray-800 dark:text-gray-100 lg:pl-0">
             {{ menuItems.find(i => i.name === currentSection)?.label || 'Admin' }}
           </h1>
           <div></div>

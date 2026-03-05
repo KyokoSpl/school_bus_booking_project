@@ -82,12 +82,12 @@ function changePage(page: number) {
 
 <template>
   <div>
-    <h2 class="text-2xl font-bold mb-6">Buchungen verwalten</h2>
+    <h2 class="text-2xl font-bold mb-6 dark:text-gray-100">Buchungen verwalten</h2>
 
     <!-- Filters -->
     <div class="card p-4 mb-6 flex flex-wrap gap-4">
       <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">Buchungsnummer</label>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Buchungsnummer</label>
         <input
           v-model="searchQuery"
           @keyup.enter="loadBookings"
@@ -97,7 +97,7 @@ function changePage(page: number) {
         />
       </div>
       <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Status</label>
         <select v-model="statusFilter" @change="loadBookings" class="px-3 py-2 border rounded-lg">
           <option value="">Alle</option>
           <option value="ausstehend">Ausstehend</option>
@@ -124,31 +124,31 @@ function changePage(page: number) {
     <div v-else class="card overflow-hidden">
       <div class="overflow-x-auto">
         <table class="w-full">
-          <thead class="bg-gray-50">
+          <thead class="bg-gray-50 dark:bg-gray-800">
             <tr>
-              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Buchungsnr.</th>
-              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Kunde</th>
-              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Reise</th>
-              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Personen</th>
-              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Preis</th>
-              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Zahlung</th>
-              <th class="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase">Aktionen</th>
+              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">Buchungsnr.</th>
+              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">Kunde</th>
+              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">Reise</th>
+              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">Personen</th>
+              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">Preis</th>
+              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">Status</th>
+              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">Zahlung</th>
+              <th class="px-4 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">Aktionen</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-gray-200">
+          <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
             <tr v-if="bookings.length === 0">
-              <td colspan="8" class="px-4 py-8 text-center text-gray-500">Keine Buchungen gefunden</td>
+              <td colspan="8" class="px-4 py-8 text-center text-gray-500 dark:text-gray-400">Keine Buchungen gefunden</td>
             </tr>
-            <tr v-for="booking in bookings" :key="booking.id" class="hover:bg-gray-50">
-              <td class="px-4 py-3 font-mono text-sm">{{ booking.buchungsnummer }}</td>
+            <tr v-for="booking in bookings" :key="booking.id" class="hover:bg-gray-50 dark:hover:bg-gray-700/50">
+              <td class="px-4 py-3 font-mono text-sm dark:text-gray-300">{{ booking.buchungsnummer }}</td>
               <td class="px-4 py-3 text-sm">
-                <p>{{ booking.kunde_name }}</p>
-                <p class="text-gray-500 text-xs">{{ booking.kunde_email }}</p>
+                <p class="dark:text-gray-100">{{ booking.kunde_name }}</p>
+                <p class="text-gray-500 dark:text-gray-400 text-xs">{{ booking.kunde_email }}</p>
               </td>
-              <td class="px-4 py-3 text-sm">{{ booking.reise_titel }}</td>
-              <td class="px-4 py-3 text-sm">{{ booking.anzahl_personen }}</td>
-              <td class="px-4 py-3 text-sm font-medium">{{ formatPrice(booking.gesamtpreis) }}</td>
+              <td class="px-4 py-3 text-sm dark:text-gray-300">{{ booking.reise_titel }}</td>
+              <td class="px-4 py-3 text-sm dark:text-gray-300">{{ booking.anzahl_personen }}</td>
+              <td class="px-4 py-3 text-sm font-medium dark:text-gray-100">{{ formatPrice(booking.gesamtpreis) }}</td>
               <td class="px-4 py-3">
                 <span
                   class="badge text-xs"
@@ -187,11 +187,11 @@ function changePage(page: number) {
       </div>
 
       <!-- Pagination -->
-      <div v-if="totalPages > 1" class="px-4 py-3 border-t flex justify-center gap-2">
+      <div v-if="totalPages > 1" class="px-4 py-3 border-t dark:border-gray-700 flex justify-center gap-2">
         <button @click="changePage(currentPage - 1)" :disabled="currentPage === 1" class="btn btn-secondary btn-sm">
           &larr;
         </button>
-        <span class="px-4 py-2 text-sm">{{ currentPage }} / {{ totalPages }}</span>
+        <span class="px-4 py-2 text-sm dark:text-gray-400">{{ currentPage }} / {{ totalPages }}</span>
         <button @click="changePage(currentPage + 1)" :disabled="currentPage === totalPages" class="btn btn-secondary btn-sm">
           &rarr;
         </button>
@@ -200,10 +200,10 @@ function changePage(page: number) {
 
     <!-- Detail Modal -->
     <div v-if="detailModal.show" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
-      <div class="bg-white rounded-xl max-w-lg w-full p-6 max-h-[90vh] overflow-y-auto">
+      <div class="bg-white dark:bg-gray-800 rounded-xl max-w-lg w-full p-6 max-h-[90vh] overflow-y-auto">
         <div class="flex justify-between items-start mb-4">
-          <h3 class="text-xl font-bold">Buchung {{ detailModal.booking?.buchungsnummer }}</h3>
-          <button @click="detailModal = { show: false, booking: null }" class="text-gray-500 hover:text-gray-700">
+          <h3 class="text-xl font-bold dark:text-gray-100">Buchung {{ detailModal.booking?.buchungsnummer }}</h3>
+          <button @click="detailModal = { show: false, booking: null }" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
@@ -213,41 +213,41 @@ function changePage(page: number) {
         <div v-if="detailModal.booking" class="space-y-4">
           <div class="grid grid-cols-2 gap-4 text-sm">
             <div>
-              <p class="text-gray-500">Kunde</p>
-              <p class="font-medium">{{ detailModal.booking.kunde_name }}</p>
-              <p class="text-gray-600">{{ detailModal.booking.kunde_email }}</p>
+              <p class="text-gray-500 dark:text-gray-400">Kunde</p>
+              <p class="font-medium dark:text-gray-100">{{ detailModal.booking.kunde_name }}</p>
+              <p class="text-gray-600 dark:text-gray-400">{{ detailModal.booking.kunde_email }}</p>
             </div>
             <div>
-              <p class="text-gray-500">Reise</p>
-              <p class="font-medium">{{ detailModal.booking.reise_titel }}</p>
-              <p class="text-gray-600">{{ detailModal.booking.reise_ziel }}</p>
+              <p class="text-gray-500 dark:text-gray-400">Reise</p>
+              <p class="font-medium dark:text-gray-100">{{ detailModal.booking.reise_titel }}</p>
+              <p class="text-gray-600 dark:text-gray-400">{{ detailModal.booking.reise_ziel }}</p>
             </div>
             <div>
-              <p class="text-gray-500">Personen</p>
-              <p class="font-medium">{{ detailModal.booking.anzahl_personen }}</p>
+              <p class="text-gray-500 dark:text-gray-400">Personen</p>
+              <p class="font-medium dark:text-gray-100">{{ detailModal.booking.anzahl_personen }}</p>
             </div>
             <div>
-              <p class="text-gray-500">Gesamtpreis</p>
-              <p class="font-medium">{{ formatPrice(detailModal.booking.gesamtpreis) }}</p>
+              <p class="text-gray-500 dark:text-gray-400">Gesamtpreis</p>
+              <p class="font-medium dark:text-gray-100">{{ formatPrice(detailModal.booking.gesamtpreis) }}</p>
             </div>
             <div>
-              <p class="text-gray-500">Buchungsdatum</p>
-              <p class="font-medium">{{ formatDate(detailModal.booking.buchungsdatum) }}</p>
+              <p class="text-gray-500 dark:text-gray-400">Buchungsdatum</p>
+              <p class="font-medium dark:text-gray-100">{{ formatDate(detailModal.booking.buchungsdatum) }}</p>
             </div>
             <div>
-              <p class="text-gray-500">Zahlungsmethode</p>
-              <p class="font-medium capitalize">{{ detailModal.booking.zahlungsmethode || '-' }}</p>
+              <p class="text-gray-500 dark:text-gray-400">Zahlungsmethode</p>
+              <p class="font-medium capitalize dark:text-gray-100">{{ detailModal.booking.zahlungsmethode || '-' }}</p>
             </div>
           </div>
 
           <div v-if="detailModal.booking.bemerkungen" class="text-sm">
-            <p class="text-gray-500">Bemerkungen</p>
-            <p class="font-medium">{{ detailModal.booking.bemerkungen }}</p>
+            <p class="text-gray-500 dark:text-gray-400">Bemerkungen</p>
+            <p class="font-medium dark:text-gray-100">{{ detailModal.booking.bemerkungen }}</p>
           </div>
 
-          <div class="border-t pt-4 space-y-3">
+          <div class="border-t dark:border-gray-700 pt-4 space-y-3">
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Buchungsstatus</label>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Buchungsstatus</label>
               <select
                 :value="detailModal.booking.status"
                 @change="updateBooking('status', ($event.target as HTMLSelectElement).value)"
@@ -262,7 +262,7 @@ function changePage(page: number) {
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Zahlungsstatus</label>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Zahlungsstatus</label>
               <select
                 :value="detailModal.booking.zahlungsstatus"
                 @change="updateBooking('zahlungsstatus', ($event.target as HTMLSelectElement).value)"

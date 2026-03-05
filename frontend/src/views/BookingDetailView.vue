@@ -172,54 +172,54 @@ function getPaymentStatusLabel(status: string) {
                   {{ getPaymentStatusLabel(booking.zahlungsstatus) }}
                 </span>
               </div>
-              <h1 class="text-2xl md:text-3xl font-bold">{{ booking.reise_titel }}</h1>
-              <p class="text-gray-600">{{ booking.reise_ziel }}</p>
+              <h1 class="text-2xl md:text-3xl font-bold dark:text-gray-100">{{ booking.reise_titel }}</h1>
+              <p class="text-gray-600 dark:text-gray-400">{{ booking.reise_ziel }}</p>
             </div>
             <div class="text-right">
-              <p class="text-sm text-gray-500">Buchungsnummer</p>
-              <p class="text-xl font-mono font-bold">{{ booking.buchungsnummer }}</p>
+              <p class="text-sm text-gray-500 dark:text-gray-400">Buchungsnummer</p>
+              <p class="text-xl font-mono font-bold dark:text-gray-100">{{ booking.buchungsnummer }}</p>
             </div>
           </div>
         </div>
 
         <!-- Trip Details -->
         <div class="card p-6">
-          <h2 class="text-xl font-semibold mb-4">Reisedetails</h2>
+          <h2 class="text-xl font-semibold mb-4 dark:text-gray-100">Reisedetails</h2>
           <div class="grid md:grid-cols-2 gap-4">
             <div class="flex items-start">
-              <svg class="w-5 h-5 mr-3 text-gray-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-5 h-5 mr-3 text-gray-400 dark:text-gray-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
               <div>
-                <p class="text-sm text-gray-500">Reisedatum</p>
-                <p class="font-medium">{{ formatDate(booking.reise_datum || booking.erstellt_am) }}</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400">Reisedatum</p>
+                <p class="font-medium dark:text-gray-100">{{ formatDate(booking.reise_datum || booking.erstellt_am) }}</p>
               </div>
             </div>
             <div class="flex items-start">
-              <svg class="w-5 h-5 mr-3 text-gray-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-5 h-5 mr-3 text-gray-400 dark:text-gray-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
               <div>
-                <p class="text-sm text-gray-500">Anzahl Personen</p>
-                <p class="font-medium">{{ booking.anzahl_personen }} Person(en)</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400">Anzahl Personen</p>
+                <p class="font-medium dark:text-gray-100">{{ booking.anzahl_personen }} Person(en)</p>
               </div>
             </div>
             <div class="flex items-start">
-              <svg class="w-5 h-5 mr-3 text-gray-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-5 h-5 mr-3 text-gray-400 dark:text-gray-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
               <div>
-                <p class="text-sm text-gray-500">Gebucht am</p>
-                <p class="font-medium">{{ formatDate(booking.buchungsdatum) }}</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400">Gebucht am</p>
+                <p class="font-medium dark:text-gray-100">{{ formatDate(booking.buchungsdatum) }}</p>
               </div>
             </div>
             <div v-if="booking.zahlungsmethode" class="flex items-start">
-              <svg class="w-5 h-5 mr-3 text-gray-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-5 h-5 mr-3 text-gray-400 dark:text-gray-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
               </svg>
               <div>
-                <p class="text-sm text-gray-500">Zahlungsmethode</p>
-                <p class="font-medium capitalize">{{ booking.zahlungsmethode }}</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400">Zahlungsmethode</p>
+                <p class="font-medium capitalize dark:text-gray-100">{{ booking.zahlungsmethode }}</p>
               </div>
             </div>
           </div>
@@ -227,21 +227,21 @@ function getPaymentStatusLabel(status: string) {
 
         <!-- Travelers -->
         <div v-if="booking.mitreisende && booking.mitreisende.length > 0" class="card p-6">
-          <h2 class="text-xl font-semibold mb-4">Mitreisende</h2>
+          <h2 class="text-xl font-semibold mb-4 dark:text-gray-100">Mitreisende</h2>
           <div class="space-y-3">
             <div
               v-for="(person, index) in booking.mitreisende"
               :key="index"
-              class="flex items-center p-3 bg-gray-50 rounded-lg"
+              class="flex items-center p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg"
             >
-              <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mr-3">
-                <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="w-10 h-10 bg-primary-100 dark:bg-primary-900/50 rounded-full flex items-center justify-center mr-3">
+                <svg class="w-5 h-5 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
               </div>
               <div>
-                <p class="font-medium">{{ person.vorname }} {{ person.nachname }}</p>
-                <p v-if="person.geburtsdatum" class="text-sm text-gray-500">
+                <p class="font-medium dark:text-gray-100">{{ person.vorname }} {{ person.nachname }}</p>
+                <p v-if="person.geburtsdatum" class="text-sm text-gray-500 dark:text-gray-400">
                   Geb.: {{ formatDate(person.geburtsdatum) }}
                 </p>
               </div>
@@ -251,8 +251,8 @@ function getPaymentStatusLabel(status: string) {
 
         <!-- Notes -->
         <div v-if="booking.bemerkungen" class="card p-6">
-          <h2 class="text-xl font-semibold mb-4">Bemerkungen</h2>
-          <p class="text-gray-600">{{ booking.bemerkungen }}</p>
+          <h2 class="text-xl font-semibold mb-4 dark:text-gray-100">Bemerkungen</h2>
+          <p class="text-gray-600 dark:text-gray-400">{{ booking.bemerkungen }}</p>
         </div>
       </div>
 
@@ -260,17 +260,17 @@ function getPaymentStatusLabel(status: string) {
       <div class="lg:col-span-1">
         <div class="card p-6 sticky top-4">
           <!-- Price Summary -->
-          <h3 class="font-semibold mb-4">Preisübersicht</h3>
+          <h3 class="font-semibold mb-4 dark:text-gray-100">Preisübersicht</h3>
           <div class="space-y-2 mb-4">
             <div class="flex justify-between">
-              <span class="text-gray-600">{{ booking.anzahl_personen }}x Teilnehmer</span>
-              <span>{{ formatPrice(booking.gesamtpreis) }}</span>
+              <span class="text-gray-600 dark:text-gray-400">{{ booking.anzahl_personen }}x Teilnehmer</span>
+              <span class="dark:text-gray-100">{{ formatPrice(booking.gesamtpreis) }}</span>
             </div>
           </div>
-          <div class="border-t pt-4 mb-6">
+          <div class="border-t dark:border-gray-700 pt-4 mb-6">
             <div class="flex justify-between text-xl font-bold">
-              <span>Gesamt</span>
-              <span class="text-primary-600">{{ formatPrice(booking.gesamtpreis) }}</span>
+              <span class="dark:text-gray-100">Gesamt</span>
+              <span class="text-primary-600 dark:text-primary-400">{{ formatPrice(booking.gesamtpreis) }}</span>
             </div>
           </div>
 
@@ -303,11 +303,11 @@ function getPaymentStatusLabel(status: string) {
           </div>
 
           <!-- Help -->
-          <div class="mt-6 p-4 bg-gray-50 rounded-lg">
-            <p class="text-sm text-gray-600">
-              <strong>Fragen?</strong><br>
+          <div class="mt-6 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+            <p class="text-sm text-gray-600 dark:text-gray-400">
+              <strong class="dark:text-gray-300">Fragen?</strong><br>
               Kontaktieren Sie uns unter<br>
-              <a href="mailto:info@sonnenschein-reisen.de" class="text-primary-600 hover:underline">
+              <a href="mailto:info@sonnenschein-reisen.de" class="text-primary-600 dark:text-primary-400 hover:underline">
                 info@sonnenschein-reisen.de
               </a>
             </p>
@@ -318,19 +318,19 @@ function getPaymentStatusLabel(status: string) {
 
     <!-- Cancel Modal -->
     <div v-if="showCancelModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
-      <div class="bg-white rounded-xl max-w-md w-full p-6">
-        <h3 class="text-xl font-bold mb-4">Buchung stornieren</h3>
-        <p class="text-gray-600 mb-4">
+      <div class="bg-white dark:bg-gray-800 rounded-xl max-w-md w-full p-6">
+        <h3 class="text-xl font-bold mb-4 dark:text-gray-100">Buchung stornieren</h3>
+        <p class="text-gray-600 dark:text-gray-400 mb-4">
           Möchten Sie diese Buchung wirklich stornieren? Diese Aktion kann nicht rückgängig gemacht werden.
         </p>
         <div class="mb-4">
-          <label class="block text-sm font-medium text-gray-700 mb-1">
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Stornierungsgrund (optional)
           </label>
           <textarea
             v-model="cancelReason"
             rows="3"
-            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500"
+            class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-gray-100 dark:placeholder-gray-400"
             placeholder="Warum möchten Sie stornieren?"
           ></textarea>
         </div>

@@ -52,13 +52,13 @@ async function handleSubmit() {
     <div class="max-w-md w-full">
       <!-- Success -->
       <div v-if="success" class="card p-8 text-center">
-        <div class="w-20 h-20 mx-auto mb-6 bg-green-100 rounded-full flex items-center justify-center">
-          <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="w-20 h-20 mx-auto mb-6 bg-green-100 dark:bg-green-900/50 rounded-full flex items-center justify-center">
+          <svg class="w-10 h-10 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h2 class="text-2xl font-bold mb-4">Passwort geändert!</h2>
-        <p class="text-gray-600 mb-6">
+        <h2 class="text-2xl font-bold mb-4 dark:text-gray-100">Passwort geändert!</h2>
+        <p class="text-gray-600 dark:text-gray-400 mb-6">
           Ihr Passwort wurde erfolgreich zurückgesetzt. Sie können sich jetzt mit Ihrem neuen Passwort anmelden.
         </p>
         <router-link :to="{ name: 'login' }" class="btn btn-primary">
@@ -69,14 +69,14 @@ async function handleSubmit() {
       <!-- Form -->
       <template v-else>
         <div class="text-center mb-8">
-          <h1 class="text-3xl font-bold">Neues Passwort</h1>
-          <p class="text-gray-600 mt-2">Geben Sie Ihr neues Passwort ein.</p>
+          <h1 class="text-3xl font-bold dark:text-gray-100">Neues Passwort</h1>
+          <p class="text-gray-600 dark:text-gray-400 mt-2">Geben Sie Ihr neues Passwort ein.</p>
         </div>
 
         <div class="card p-8">
           <form @submit.prevent="handleSubmit" class="space-y-6">
             <div>
-              <label for="password" class="block text-sm font-medium text-gray-700 mb-1">
+              <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Neues Passwort (min. 8 Zeichen)
               </label>
               <div class="relative">
@@ -86,12 +86,12 @@ async function handleSubmit() {
                   :type="showPassword ? 'text' : 'password'"
                   required
                   minlength="8"
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 pr-12"
+                  class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-gray-100 dark:placeholder-gray-400 pr-12"
                 />
                 <button
                   type="button"
                   @click="showPassword = !showPassword"
-                  class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                  class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
                 >
                   <svg v-if="!showPassword" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -105,7 +105,7 @@ async function handleSubmit() {
             </div>
 
             <div>
-              <label for="confirmPassword" class="block text-sm font-medium text-gray-700 mb-1">
+              <label for="confirmPassword" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Passwort bestätigen
               </label>
               <input
@@ -113,10 +113,10 @@ async function handleSubmit() {
                 v-model="confirmPassword"
                 type="password"
                 required
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500"
-                :class="{ 'border-red-500': confirmPassword && password !== confirmPassword }"
+                class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-gray-100 dark:placeholder-gray-400"
+                :class="{ 'border-red-500 dark:border-red-500': confirmPassword && password !== confirmPassword }"
               />
-              <p v-if="confirmPassword && password !== confirmPassword" class="text-red-500 text-sm mt-1">
+              <p v-if="confirmPassword && password !== confirmPassword" class="text-red-500 dark:text-red-400 text-sm mt-1">
                 Die Passwörter stimmen nicht überein
               </p>
             </div>

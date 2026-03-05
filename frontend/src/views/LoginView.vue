@@ -47,14 +47,14 @@ async function handleLogin() {
   <div class="min-h-[80vh] flex items-center justify-center py-12 px-4">
     <div class="max-w-md w-full">
       <div class="text-center mb-8">
-        <h1 class="text-3xl font-bold">Willkommen zurück</h1>
-        <p class="text-gray-600 mt-2">Melden Sie sich an, um Ihre Buchungen zu verwalten</p>
+        <h1 class="text-3xl font-bold dark:text-gray-100">Willkommen zurück</h1>
+        <p class="text-gray-600 dark:text-gray-400 mt-2">Melden Sie sich an, um Ihre Buchungen zu verwalten</p>
       </div>
 
       <div class="card p-8">
         <form @submit.prevent="handleLogin" class="space-y-6">
           <div>
-            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
+            <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               E-Mail-Adresse
             </label>
             <input
@@ -63,13 +63,13 @@ async function handleLogin() {
               type="email"
               autocomplete="email"
               required
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+              class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-gray-100 dark:placeholder-gray-400"
               placeholder="ihre@email.de"
             />
           </div>
 
           <div>
-            <label for="password" class="block text-sm font-medium text-gray-700 mb-1">
+            <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Passwort
             </label>
             <div class="relative">
@@ -79,13 +79,13 @@ async function handleLogin() {
                 :type="showPassword ? 'text' : 'password'"
                 autocomplete="current-password"
                 required
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 pr-12"
+                class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-gray-100 dark:placeholder-gray-400 pr-12"
                 placeholder="Ihr Passwort"
               />
               <button
                 type="button"
                 @click="showPassword = !showPassword"
-                class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
               >
                 <svg v-if="!showPassword" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -103,12 +103,12 @@ async function handleLogin() {
               <input
                 v-model="rememberMe"
                 type="checkbox"
-                class="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
+                class="w-4 h-4 text-primary-600 border-gray-300 dark:border-gray-600 rounded focus:ring-primary-500 dark:bg-gray-700"
               />
-              <span class="ml-2 text-sm text-gray-600">Angemeldet bleiben</span>
+              <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">Angemeldet bleiben</span>
             </label>
 
-            <router-link :to="{ name: 'forgot-password' }" class="text-sm text-primary-600 hover:underline">
+            <router-link :to="{ name: 'forgot-password' }" class="text-sm text-primary-600 dark:text-primary-400 hover:underline">
               Passwort vergessen?
             </router-link>
           </div>
@@ -124,9 +124,9 @@ async function handleLogin() {
         </form>
 
         <div class="mt-6 text-center">
-          <p class="text-gray-600">
+          <p class="text-gray-600 dark:text-gray-400">
             Noch kein Konto?
-            <router-link :to="{ name: 'register' }" class="text-primary-600 hover:underline font-medium">
+            <router-link :to="{ name: 'register' }" class="text-primary-600 dark:text-primary-400 hover:underline font-medium">
               Jetzt registrieren
             </router-link>
           </p>

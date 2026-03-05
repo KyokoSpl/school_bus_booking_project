@@ -123,14 +123,14 @@ function formatPrice(price: number) {
   <div class="container mx-auto px-4 py-8">
     <!-- Header -->
     <div class="mb-8">
-      <h1 class="text-3xl md:text-4xl font-bold mb-2">Unsere Reisen</h1>
-      <p class="text-gray-600">Finden Sie Ihre perfekte Busreise</p>
+      <h1 class="text-3xl md:text-4xl font-bold mb-2 dark:text-gray-100">Unsere Reisen</h1>
+      <p class="text-gray-600 dark:text-gray-400">Finden Sie Ihre perfekte Busreise</p>
     </div>
 
     <!-- Filters -->
     <div class="card mb-8">
-      <div class="p-4 border-b flex items-center justify-between">
-        <h2 class="font-semibold">Filter & Suche</h2>
+      <div class="p-4 border-b dark:border-gray-700 flex items-center justify-between">
+        <h2 class="font-semibold dark:text-gray-100">Filter & Suche</h2>
         <button @click="showFilters = !showFilters" class="md:hidden btn btn-secondary btn-sm">
           {{ showFilters ? 'Verbergen' : 'Anzeigen' }}
         </button>
@@ -139,35 +139,35 @@ function formatPrice(price: number) {
       <div :class="['p-4', { 'hidden md:block': !showFilters }]">
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Ziel</label>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ziel</label>
             <input
               v-model="filters.ziel"
               type="text"
               placeholder="z.B. Berlin"
-              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500"
+              class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-gray-100 dark:placeholder-gray-400"
             />
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Abfahrt ab</label>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Abfahrt ab</label>
             <input
               v-model="filters.abfahrt_von"
               type="date"
-              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500"
+              class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-gray-100"
             />
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Abfahrt bis</label>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Abfahrt bis</label>
             <input
               v-model="filters.abfahrt_bis"
               type="date"
-              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500"
+              class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-gray-100"
             />
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Sortierung</label>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Sortierung</label>
             <select
               v-model="filters.sortierung"
-              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500"
+              class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-gray-100"
             >
               <option value="datum_asc">Datum aufsteigend</option>
               <option value="datum_desc">Datum absteigend</option>
@@ -179,23 +179,23 @@ function formatPrice(price: number) {
         
         <div class="grid md:grid-cols-4 gap-4 mb-4">
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Preis min (€)</label>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Preis min (€)</label>
             <input
               v-model.number="filters.preis_min"
               type="number"
               min="0"
               placeholder="0"
-              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500"
+              class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-gray-100 dark:placeholder-gray-400"
             />
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Preis max (€)</label>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Preis max (€)</label>
             <input
               v-model.number="filters.preis_max"
               type="number"
               min="0"
               placeholder="500"
-              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500"
+              class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-gray-100 dark:placeholder-gray-400"
             />
           </div>
           <div class="flex items-end">
@@ -203,9 +203,9 @@ function formatPrice(price: number) {
               <input
                 v-model="filters.nur_verfuegbar"
                 type="checkbox"
-                class="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
+                class="w-4 h-4 text-primary-600 border-gray-300 dark:border-gray-600 rounded focus:ring-primary-500 dark:bg-gray-700"
               />
-              <span class="ml-2 text-sm text-gray-700">Nur verfügbare Reisen</span>
+              <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">Nur verfügbare Reisen</span>
             </label>
           </div>
         </div>
@@ -225,7 +225,7 @@ function formatPrice(price: number) {
     </div>
 
     <!-- Results info -->
-    <div class="mb-4 text-gray-600">
+    <div class="mb-4 text-gray-600 dark:text-gray-400">
       <span v-if="!loading">{{ totalTrips }} Reise(n) gefunden</span>
     </div>
 
@@ -236,11 +236,11 @@ function formatPrice(price: number) {
 
     <!-- No results -->
     <div v-else-if="trips.length === 0" class="text-center py-12">
-      <svg class="w-16 h-16 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg class="w-16 h-16 mx-auto text-gray-400 dark:text-gray-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
-      <h3 class="text-xl font-semibold mb-2">Keine Reisen gefunden</h3>
-      <p class="text-gray-600 mb-4">Versuchen Sie es mit anderen Suchkriterien.</p>
+      <h3 class="text-xl font-semibold mb-2 dark:text-gray-100">Keine Reisen gefunden</h3>
+      <p class="text-gray-600 dark:text-gray-400 mb-4">Versuchen Sie es mit anderen Suchkriterien.</p>
       <button @click="resetFilters" class="btn btn-primary">Filter zurücksetzen</button>
     </div>
 
@@ -271,32 +271,32 @@ function formatPrice(price: number) {
         </div>
         
         <div class="p-5">
-          <div class="flex items-center gap-2 text-sm text-gray-500 mb-2">
+          <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-2">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
             {{ formatDate(trip.abfahrt_datum) }}
           </div>
           
-          <h3 class="text-xl font-semibold mb-2 group-hover:text-primary-600 transition-colors">{{ trip.titel }}</h3>
+          <h3 class="text-xl font-semibold mb-2 dark:text-gray-100 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">{{ trip.titel }}</h3>
           
-          <div class="flex items-center text-gray-600 text-sm mb-3">
+          <div class="flex items-center text-gray-600 dark:text-gray-400 text-sm mb-3">
             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
             </svg>
             {{ trip.ziel }}
           </div>
           
-          <p class="text-gray-600 text-sm mb-4 line-clamp-2">{{ trip.beschreibung }}</p>
+          <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">{{ trip.beschreibung }}</p>
           
           <div class="flex items-center justify-between text-sm">
-            <span class="text-gray-500">
+            <span class="text-gray-500 dark:text-gray-400">
               <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
               {{ trip.verfuegbare_plaetze }} / {{ trip.max_teilnehmer }} frei
             </span>
-            <span class="text-primary-600 font-medium group-hover:underline">Details &rarr;</span>
+            <span class="text-primary-600 dark:text-primary-400 font-medium group-hover:underline">Details &rarr;</span>
           </div>
         </div>
       </router-link>
@@ -322,7 +322,7 @@ function formatPrice(price: number) {
         >
           {{ page }}
         </button>
-        <span v-else-if="Math.abs(page - currentPage) === 2" class="px-2 py-2">...</span>
+        <span v-else-if="Math.abs(page - currentPage) === 2" class="px-2 py-2 dark:text-gray-400">...</span>
       </template>
       
       <button

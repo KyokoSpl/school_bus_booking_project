@@ -91,13 +91,13 @@ async function handleRegister() {
       <!-- Success Message -->
       <div v-if="registrationComplete" class="text-center">
         <div class="card p-8">
-          <div class="w-20 h-20 mx-auto mb-6 bg-green-100 rounded-full flex items-center justify-center">
-            <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="w-20 h-20 mx-auto mb-6 bg-green-100 dark:bg-green-900/50 rounded-full flex items-center justify-center">
+            <svg class="w-10 h-10 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h2 class="text-2xl font-bold mb-4">Registrierung erfolgreich!</h2>
-          <p class="text-gray-600 mb-6">
+          <h2 class="text-2xl font-bold mb-4 dark:text-gray-100">Registrierung erfolgreich!</h2>
+          <p class="text-gray-600 dark:text-gray-400 mb-6">
             Wir haben Ihnen eine E-Mail gesendet. Bitte bestätigen Sie Ihre E-Mail-Adresse, 
             um Ihr Konto zu aktivieren.
           </p>
@@ -110,15 +110,15 @@ async function handleRegister() {
       <!-- Registration Form -->
       <template v-else>
         <div class="text-center mb-8">
-          <h1 class="text-3xl font-bold">Konto erstellen</h1>
-          <p class="text-gray-600 mt-2">Registrieren Sie sich für Ihr persönliches Buchungsportal</p>
+          <h1 class="text-3xl font-bold dark:text-gray-100">Konto erstellen</h1>
+          <p class="text-gray-600 dark:text-gray-400 mt-2">Registrieren Sie sich für Ihr persönliches Buchungsportal</p>
         </div>
 
         <div class="card p-8">
           <form @submit.prevent="handleRegister" class="space-y-5">
             <div class="grid md:grid-cols-2 gap-4">
               <div>
-                <label for="vorname" class="block text-sm font-medium text-gray-700 mb-1">
+                <label for="vorname" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Vorname *
                 </label>
                 <input
@@ -126,12 +126,12 @@ async function handleRegister() {
                   v-model="form.vorname"
                   type="text"
                   required
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                  class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-gray-100 dark:placeholder-gray-400"
                   placeholder="Max"
                 />
               </div>
               <div>
-                <label for="nachname" class="block text-sm font-medium text-gray-700 mb-1">
+                <label for="nachname" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Nachname *
                 </label>
                 <input
@@ -139,14 +139,14 @@ async function handleRegister() {
                   v-model="form.nachname"
                   type="text"
                   required
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                  class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-gray-100 dark:placeholder-gray-400"
                   placeholder="Mustermann"
                 />
               </div>
             </div>
 
             <div>
-              <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
+              <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 E-Mail-Adresse *
               </label>
               <input
@@ -154,26 +154,26 @@ async function handleRegister() {
                 v-model="form.email"
                 type="email"
                 required
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-gray-100 dark:placeholder-gray-400"
                 placeholder="max.mustermann@email.de"
               />
             </div>
 
             <div>
-              <label for="telefon" class="block text-sm font-medium text-gray-700 mb-1">
+              <label for="telefon" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Telefon (optional)
               </label>
               <input
                 id="telefon"
                 v-model="form.telefon"
                 type="tel"
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-gray-100 dark:placeholder-gray-400"
                 placeholder="+49 123 456789"
               />
             </div>
 
             <div>
-              <label for="password" class="block text-sm font-medium text-gray-700 mb-1">
+              <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Passwort * (min. 8 Zeichen)
               </label>
               <div class="relative">
@@ -183,13 +183,13 @@ async function handleRegister() {
                   :type="showPassword ? 'text' : 'password'"
                   required
                   minlength="8"
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 pr-12"
+                  class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-gray-100 dark:placeholder-gray-400 pr-12"
                   placeholder="Mindestens 8 Zeichen"
                 />
                 <button
                   type="button"
                   @click="showPassword = !showPassword"
-                  class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                  class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
                 >
                   <svg v-if="!showPassword" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -207,17 +207,17 @@ async function handleRegister() {
                     v-for="i in 5"
                     :key="i"
                     class="flex-1 rounded"
-                    :class="i <= passwordStrength.score ? passwordStrength.color : 'bg-gray-200'"
+                    :class="i <= passwordStrength.score ? passwordStrength.color : 'bg-gray-200 dark:bg-gray-600'"
                   ></div>
                 </div>
-                <p class="text-xs mt-1" :class="passwordStrength.score >= 3 ? 'text-green-600' : 'text-gray-500'">
+                <p class="text-xs mt-1" :class="passwordStrength.score >= 3 ? 'text-green-600 dark:text-green-400' : 'text-gray-500 dark:text-gray-400'">
                   {{ passwordStrength.label }}
                 </p>
               </div>
             </div>
 
             <div>
-              <label for="passwordConfirm" class="block text-sm font-medium text-gray-700 mb-1">
+              <label for="passwordConfirm" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Passwort bestätigen *
               </label>
               <input
@@ -225,11 +225,11 @@ async function handleRegister() {
                 v-model="form.passwordConfirm"
                 type="password"
                 required
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-                :class="{ 'border-red-500': form.passwordConfirm && form.password !== form.passwordConfirm }"
+                class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-gray-100 dark:placeholder-gray-400"
+                :class="{ 'border-red-500 dark:border-red-500': form.passwordConfirm && form.password !== form.passwordConfirm }"
                 placeholder="Passwort wiederholen"
               />
-              <p v-if="form.passwordConfirm && form.password !== form.passwordConfirm" class="text-red-500 text-sm mt-1">
+              <p v-if="form.passwordConfirm && form.password !== form.passwordConfirm" class="text-red-500 dark:text-red-400 text-sm mt-1">
                 Die Passwörter stimmen nicht überein
               </p>
             </div>
@@ -240,11 +240,11 @@ async function handleRegister() {
                   v-model="form.agb_akzeptiert"
                   type="checkbox"
                   required
-                  class="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500 mt-1"
+                  class="w-4 h-4 text-primary-600 border-gray-300 dark:border-gray-600 rounded focus:ring-primary-500 dark:bg-gray-700 mt-1"
                 />
-                <span class="ml-2 text-sm text-gray-600">
+                <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">
                   Ich akzeptiere die
-                  <router-link :to="{ name: 'terms' }" target="_blank" class="text-primary-600 hover:underline">
+                  <router-link :to="{ name: 'terms' }" target="_blank" class="text-primary-600 dark:text-primary-400 hover:underline">
                     AGB
                   </router-link>
                   *
@@ -256,11 +256,11 @@ async function handleRegister() {
                   v-model="form.datenschutz_akzeptiert"
                   type="checkbox"
                   required
-                  class="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500 mt-1"
+                  class="w-4 h-4 text-primary-600 border-gray-300 dark:border-gray-600 rounded focus:ring-primary-500 dark:bg-gray-700 mt-1"
                 />
-                <span class="ml-2 text-sm text-gray-600">
+                <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">
                   Ich habe die
-                  <router-link :to="{ name: 'privacy' }" target="_blank" class="text-primary-600 hover:underline">
+                  <router-link :to="{ name: 'privacy' }" target="_blank" class="text-primary-600 dark:text-primary-400 hover:underline">
                     Datenschutzerklärung
                   </router-link>
                   gelesen und akzeptiere sie *
@@ -280,9 +280,9 @@ async function handleRegister() {
           </form>
 
           <div class="mt-6 text-center">
-            <p class="text-gray-600">
+            <p class="text-gray-600 dark:text-gray-400">
               Bereits registriert?
-              <router-link :to="{ name: 'login' }" class="text-primary-600 hover:underline font-medium">
+              <router-link :to="{ name: 'login' }" class="text-primary-600 dark:text-primary-400 hover:underline font-medium">
                 Jetzt anmelden
               </router-link>
             </p>

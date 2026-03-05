@@ -77,7 +77,7 @@ function changePage(page: number) {
 
 <template>
   <div class="container mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold mb-8">Meine Buchungen</h1>
+    <h1 class="text-3xl font-bold mb-8 dark:text-gray-100">Meine Buchungen</h1>
 
     <!-- Loading -->
     <div v-if="loading" class="flex justify-center py-12">
@@ -86,11 +86,11 @@ function changePage(page: number) {
 
     <!-- Empty state -->
     <div v-else-if="bookings.length === 0" class="text-center py-12">
-      <svg class="w-20 h-20 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg class="w-20 h-20 mx-auto text-gray-400 dark:text-gray-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
       </svg>
-      <h2 class="text-xl font-semibold mb-2">Keine Buchungen vorhanden</h2>
-      <p class="text-gray-600 mb-6">Sie haben noch keine Reisen gebucht.</p>
+      <h2 class="text-xl font-semibold mb-2 dark:text-gray-100">Keine Buchungen vorhanden</h2>
+      <p class="text-gray-600 dark:text-gray-400 mb-6">Sie haben noch keine Reisen gebucht.</p>
       <router-link :to="{ name: 'trips' }" class="btn btn-primary">
         Reisen entdecken
       </router-link>
@@ -102,7 +102,7 @@ function changePage(page: number) {
         v-for="booking in bookings"
         :key="booking.id"
         :to="{ name: 'booking-detail', params: { id: booking.id } }"
-        class="card p-6 block hover:shadow-lg transition-shadow"
+        class="card p-6 block hover:shadow-lg dark:hover:shadow-gray-900/50 transition-shadow"
       >
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div class="flex-1">
@@ -110,23 +110,23 @@ function changePage(page: number) {
               <span class="badge" :class="getStatusBadgeClass(booking.status)">
                 {{ getStatusLabel(booking.status) }}
               </span>
-              <span class="text-gray-500 text-sm">{{ booking.buchungsnummer }}</span>
+              <span class="text-gray-500 dark:text-gray-400 text-sm">{{ booking.buchungsnummer }}</span>
             </div>
-            <h3 class="text-xl font-semibold">{{ booking.reise_titel }}</h3>
-            <p class="text-gray-600">{{ booking.reise_ziel }}</p>
+            <h3 class="text-xl font-semibold dark:text-gray-100">{{ booking.reise_titel }}</h3>
+            <p class="text-gray-600 dark:text-gray-400">{{ booking.reise_ziel }}</p>
           </div>
           
           <div class="flex flex-col md:items-end gap-2">
-            <div class="text-2xl font-bold text-primary-600">
+            <div class="text-2xl font-bold text-primary-600 dark:text-primary-400">
               {{ formatPrice(booking.gesamtpreis) }}
             </div>
-            <div class="text-sm text-gray-500">
+            <div class="text-sm text-gray-500 dark:text-gray-400">
               {{ booking.anzahl_personen }} Person(en)
             </div>
           </div>
         </div>
 
-        <div class="mt-4 pt-4 border-t flex flex-wrap gap-4 text-sm text-gray-500">
+        <div class="mt-4 pt-4 border-t dark:border-gray-700 flex flex-wrap gap-4 text-sm text-gray-500 dark:text-gray-400">
           <div class="flex items-center">
             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -159,7 +159,7 @@ function changePage(page: number) {
       >
         &larr; Zurück
       </button>
-      <span class="px-4 py-2 text-gray-600">
+      <span class="px-4 py-2 text-gray-600 dark:text-gray-400">
         Seite {{ currentPage }} von {{ totalPages }}
       </span>
       <button

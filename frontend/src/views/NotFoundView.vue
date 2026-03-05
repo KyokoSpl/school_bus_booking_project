@@ -1,9 +1,9 @@
 <template>
   <div class="min-h-[70vh] flex items-center justify-center py-12 px-4">
     <div class="text-center">
-      <h1 class="text-9xl font-bold text-primary-600">404</h1>
-      <h2 class="text-3xl font-bold mt-4 mb-2">Seite nicht gefunden</h2>
-      <p class="text-gray-600 mb-8 max-w-md mx-auto">
+      <h1 class="text-9xl font-bold text-primary-600 dark:text-primary-400">404</h1>
+      <h2 class="text-3xl font-bold mt-4 mb-2 dark:text-gray-100">Seite nicht gefunden</h2>
+      <p class="text-gray-600 dark:text-gray-400 mb-8 max-w-md mx-auto">
         Die angeforderte Seite existiert nicht oder wurde verschoben.
       </p>
       <router-link :to="{ name: 'home' }" class="btn btn-primary">

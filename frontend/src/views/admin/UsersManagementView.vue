@@ -141,7 +141,7 @@ function changePage(page: number) {
 <template>
   <div>
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-      <h2 class="text-2xl font-bold">Kunden verwalten</h2>
+      <h2 class="text-2xl font-bold dark:text-gray-100">Kunden verwalten</h2>
       <button @click="openCreateModal" class="btn btn-primary">
         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -153,7 +153,7 @@ function changePage(page: number) {
     <!-- Filters -->
     <div class="card p-4 mb-6 flex flex-wrap gap-4">
       <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">Suche</label>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Suche</label>
         <input
           v-model="searchQuery"
           @keyup.enter="loadUsers"
@@ -163,7 +163,7 @@ function changePage(page: number) {
         />
       </div>
       <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">Rolle</label>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Rolle</label>
         <select v-model="roleFilter" @change="loadUsers" class="px-3 py-2 border rounded-lg">
           <option value="">Alle</option>
           <option value="kunde">Kunde</option>
@@ -184,27 +184,27 @@ function changePage(page: number) {
     <div v-else class="card overflow-hidden">
       <div class="overflow-x-auto">
         <table class="w-full">
-          <thead class="bg-gray-50">
+          <thead class="bg-gray-50 dark:bg-gray-800">
             <tr>
-              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
-              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">E-Mail</th>
-              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Rolle</th>
-              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Registriert</th>
-              <th class="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase">Aktionen</th>
+              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">Name</th>
+              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">E-Mail</th>
+              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">Rolle</th>
+              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">Status</th>
+              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">Registriert</th>
+              <th class="px-4 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">Aktionen</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-gray-200">
+          <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
             <tr v-if="users.length === 0">
-              <td colspan="6" class="px-4 py-8 text-center text-gray-500">Keine Benutzer gefunden</td>
+              <td colspan="6" class="px-4 py-8 text-center text-gray-500 dark:text-gray-400">Keine Benutzer gefunden</td>
             </tr>
-            <tr v-for="user in users" :key="user.id" class="hover:bg-gray-50">
+            <tr v-for="user in users" :key="user.id" class="hover:bg-gray-50 dark:hover:bg-gray-700/50">
               <td class="px-4 py-3">
-                <p class="font-medium">{{ user.vorname }} {{ user.nachname }}</p>
+                <p class="font-medium dark:text-gray-100">{{ user.vorname }} {{ user.nachname }}</p>
               </td>
-              <td class="px-4 py-3 text-sm">
+              <td class="px-4 py-3 text-sm dark:text-gray-300">
                 {{ user.email }}
-                <span v-if="!user.email_verifiziert" class="text-yellow-600 text-xs ml-1">(nicht verifiziert)</span>
+                <span v-if="!user.email_verifiziert" class="text-yellow-600 dark:text-yellow-400 text-xs ml-1">(nicht verifiziert)</span>
               </td>
               <td class="px-4 py-3">
                 <span class="badge" :class="user.rolle === 'admin' ? 'badge-primary' : 'badge-secondary'">
@@ -216,7 +216,7 @@ function changePage(page: number) {
                   {{ user.aktiv ? 'Aktiv' : 'Inaktiv' }}
                 </span>
               </td>
-              <td class="px-4 py-3 text-sm">{{ formatDate(user.erstellt_am) }}</td>
+              <td class="px-4 py-3 text-sm dark:text-gray-300">{{ formatDate(user.erstellt_am) }}</td>
               <td class="px-4 py-3 text-right">
                 <div class="flex justify-end gap-2">
                   <button @click="openEditModal(user)" class="btn btn-secondary btn-sm">
@@ -233,11 +233,11 @@ function changePage(page: number) {
       </div>
 
       <!-- Pagination -->
-      <div v-if="totalPages > 1" class="px-4 py-3 border-t flex justify-center gap-2">
+      <div v-if="totalPages > 1" class="px-4 py-3 border-t dark:border-gray-700 flex justify-center gap-2">
         <button @click="changePage(currentPage - 1)" :disabled="currentPage === 1" class="btn btn-secondary btn-sm">
           &larr;
         </button>
-        <span class="px-4 py-2 text-sm">{{ currentPage }} / {{ totalPages }}</span>
+        <span class="px-4 py-2 text-sm dark:text-gray-400">{{ currentPage }} / {{ totalPages }}</span>
         <button @click="changePage(currentPage + 1)" :disabled="currentPage === totalPages" class="btn btn-secondary btn-sm">
           &rarr;
         </button>
@@ -246,33 +246,33 @@ function changePage(page: number) {
 
     <!-- Edit Modal -->
     <div v-if="editModal.show" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
-      <div class="bg-white rounded-xl max-w-md w-full p-6">
-        <h3 class="text-xl font-bold mb-4">{{ editModal.isNew ? 'Neuer Benutzer' : 'Benutzer bearbeiten' }}</h3>
+      <div class="bg-white dark:bg-gray-800 rounded-xl max-w-md w-full p-6">
+        <h3 class="text-xl font-bold mb-4 dark:text-gray-100">{{ editModal.isNew ? 'Neuer Benutzer' : 'Benutzer bearbeiten' }}</h3>
         
         <form @submit.prevent="handleSave" class="space-y-4">
           <div class="grid grid-cols-2 gap-4">
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Vorname *</label>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Vorname *</label>
               <input v-model="editForm.vorname" type="text" required class="w-full px-3 py-2 border rounded-lg" />
             </div>
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Nachname *</label>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nachname *</label>
               <input v-model="editForm.nachname" type="text" required class="w-full px-3 py-2 border rounded-lg" />
             </div>
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">E-Mail *</label>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">E-Mail *</label>
             <input v-model="editForm.email" type="email" required class="w-full px-3 py-2 border rounded-lg" />
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Telefon</label>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Telefon</label>
             <input v-model="editForm.telefon" type="tel" class="w-full px-3 py-2 border rounded-lg" />
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               {{ editModal.isNew ? 'Passwort *' : 'Neues Passwort (leer lassen = unverändert)' }}
             </label>
             <input v-model="editForm.password" type="password" :required="editModal.isNew" class="w-full px-3 py-2 border rounded-lg" />
@@ -280,7 +280,7 @@ function changePage(page: number) {
 
           <div class="grid grid-cols-2 gap-4">
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Rolle</label>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Rolle</label>
               <select v-model="editForm.rolle" class="w-full px-3 py-2 border rounded-lg">
                 <option value="kunde">Kunde</option>
                 <option value="admin">Admin</option>
@@ -289,7 +289,7 @@ function changePage(page: number) {
             <div class="flex items-end pb-2">
               <label class="flex items-center cursor-pointer">
                 <input v-model="editForm.aktiv" type="checkbox" class="w-4 h-4 text-primary-600 rounded" />
-                <span class="ml-2 text-sm">Aktiv</span>
+                <span class="ml-2 text-sm dark:text-gray-300">Aktiv</span>
               </label>
             </div>
           </div>
@@ -309,9 +309,9 @@ function changePage(page: number) {
 
     <!-- Delete Modal -->
     <div v-if="deleteModal.show" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
-      <div class="bg-white rounded-xl max-w-md w-full p-6">
-        <h3 class="text-xl font-bold mb-4">Benutzer löschen</h3>
-        <p class="text-gray-600 mb-6">
+      <div class="bg-white dark:bg-gray-800 rounded-xl max-w-md w-full p-6">
+        <h3 class="text-xl font-bold mb-4 dark:text-gray-100">Benutzer löschen</h3>
+        <p class="text-gray-600 dark:text-gray-400 mb-6">
           Möchten Sie "{{ deleteModal.user?.vorname }} {{ deleteModal.user?.nachname }}" wirklich löschen?
         </p>
         <div class="flex gap-3">

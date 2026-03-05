@@ -162,44 +162,44 @@ function formatPrice(price: number) {
           <div class="flex flex-col items-center">
             <div
               class="w-10 h-10 rounded-full flex items-center justify-center font-bold"
-              :class="step >= 1 ? 'bg-primary-600 text-white' : 'bg-gray-200 text-gray-600'"
+              :class="step >= 1 ? 'bg-primary-600 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400'"
             >
               <svg v-if="step > 1" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
               <span v-else>1</span>
             </div>
-            <span class="mt-2 text-sm" :class="step >= 1 ? 'text-primary-600 font-medium' : 'text-gray-500'">Teilnehmer</span>
+            <span class="mt-2 text-sm" :class="step >= 1 ? 'text-primary-600 dark:text-primary-400 font-medium' : 'text-gray-500 dark:text-gray-400'">Teilnehmer</span>
           </div>
           <!-- Line 1-2 -->
-          <div class="flex-1 h-1 mt-5 mx-2" :class="step > 1 ? 'bg-primary-600' : 'bg-gray-200'"></div>
+          <div class="flex-1 h-1 mt-5 mx-2" :class="step > 1 ? 'bg-primary-600' : 'bg-gray-200 dark:bg-gray-700'"></div>
           <!-- Step 2 -->
           <div class="flex flex-col items-center">
             <div
               class="w-10 h-10 rounded-full flex items-center justify-center font-bold"
-              :class="step >= 2 ? 'bg-primary-600 text-white' : 'bg-gray-200 text-gray-600'"
+              :class="step >= 2 ? 'bg-primary-600 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400'"
             >
               <svg v-if="step > 2" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
               <span v-else>2</span>
             </div>
-            <span class="mt-2 text-sm" :class="step >= 2 ? 'text-primary-600 font-medium' : 'text-gray-500'">Zahlung</span>
+            <span class="mt-2 text-sm" :class="step >= 2 ? 'text-primary-600 dark:text-primary-400 font-medium' : 'text-gray-500 dark:text-gray-400'">Zahlung</span>
           </div>
           <!-- Line 2-3 -->
-          <div class="flex-1 h-1 mt-5 mx-2" :class="step > 2 ? 'bg-primary-600' : 'bg-gray-200'"></div>
+          <div class="flex-1 h-1 mt-5 mx-2" :class="step > 2 ? 'bg-primary-600' : 'bg-gray-200 dark:bg-gray-700'"></div>
           <!-- Step 3 -->
           <div class="flex flex-col items-center">
             <div
               class="w-10 h-10 rounded-full flex items-center justify-center font-bold"
-              :class="step >= 3 ? 'bg-primary-600 text-white' : 'bg-gray-200 text-gray-600'"
+              :class="step >= 3 ? 'bg-primary-600 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400'"
             >
               <svg v-if="step > 3" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
               <span v-else>3</span>
             </div>
-            <span class="mt-2 text-sm" :class="step >= 3 ? 'text-primary-600 font-medium' : 'text-gray-500'">Bestätigung</span>
+            <span class="mt-2 text-sm" :class="step >= 3 ? 'text-primary-600 dark:text-primary-400 font-medium' : 'text-gray-500 dark:text-gray-400'">Bestätigung</span>
           </div>
         </div>
       </div>
@@ -209,71 +209,71 @@ function formatPrice(price: number) {
         <div :class="step === 4 ? 'lg:col-span-3' : 'lg:col-span-2'">
           <!-- Step 1: Travelers -->
           <div v-if="step === 1" class="card p-6">
-            <h2 class="text-2xl font-bold mb-6">Teilnehmer</h2>
+            <h2 class="text-2xl font-bold mb-6 dark:text-gray-100">Teilnehmer</h2>
 
             <div class="mb-6">
-              <label class="block text-sm font-medium text-gray-700 mb-2">Anzahl Personen</label>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Anzahl Personen</label>
               <select
                 v-model="form.anzahl_personen"
-                class="w-full md:w-48 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500"
+                class="w-full md:w-48 px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-gray-100"
               >
                 <option v-for="n in maxPersons" :key="n" :value="n">{{ n }} Person(en)</option>
               </select>
             </div>
 
             <!-- Main Booker -->
-            <div class="mb-6 p-4 bg-gray-50 rounded-lg">
-              <h3 class="font-semibold mb-3">Hauptbucher (Sie)</h3>
+            <div class="mb-6 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+              <h3 class="font-semibold mb-3 dark:text-gray-100">Hauptbucher (Sie)</h3>
               <div class="grid md:grid-cols-2 gap-4">
                 <div>
-                  <label class="block text-sm text-gray-600">Vorname</label>
-                  <p class="font-medium">{{ authStore.user?.vorname }}</p>
+                  <label class="block text-sm text-gray-600 dark:text-gray-400">Vorname</label>
+                  <p class="font-medium dark:text-gray-100">{{ authStore.user?.vorname }}</p>
                 </div>
                 <div>
-                  <label class="block text-sm text-gray-600">Nachname</label>
-                  <p class="font-medium">{{ authStore.user?.nachname }}</p>
+                  <label class="block text-sm text-gray-600 dark:text-gray-400">Nachname</label>
+                  <p class="font-medium dark:text-gray-100">{{ authStore.user?.nachname }}</p>
                 </div>
                 <div>
-                  <label class="block text-sm text-gray-600">E-Mail</label>
-                  <p class="font-medium">{{ authStore.user?.email }}</p>
+                  <label class="block text-sm text-gray-600 dark:text-gray-400">E-Mail</label>
+                  <p class="font-medium dark:text-gray-100">{{ authStore.user?.email }}</p>
                 </div>
               </div>
             </div>
 
             <!-- Additional Travelers -->
             <div v-if="form.mitreisende.length > 0" class="space-y-4">
-              <h3 class="font-semibold">Mitreisende</h3>
+              <h3 class="font-semibold dark:text-gray-100">Mitreisende</h3>
               <div
                 v-for="(traveler, index) in form.mitreisende"
                 :key="index"
-                class="p-4 border border-gray-200 rounded-lg"
+                class="p-4 border border-gray-200 dark:border-gray-700 rounded-lg"
               >
-                <h4 class="font-medium mb-3">Person {{ index + 2 }}</h4>
+                <h4 class="font-medium mb-3 dark:text-gray-100">Person {{ index + 2 }}</h4>
                 <div class="grid md:grid-cols-3 gap-4">
                   <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Vorname *</label>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Vorname *</label>
                     <input
                       v-model="traveler.vorname"
                       type="text"
                       required
-                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500"
+                      class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-gray-100"
                     />
                   </div>
                   <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Nachname *</label>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nachname *</label>
                     <input
                       v-model="traveler.nachname"
                       type="text"
                       required
-                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500"
+                      class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-gray-100"
                     />
                   </div>
                   <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Geburtsdatum</label>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Geburtsdatum</label>
                     <input
                       v-model="traveler.geburtsdatum"
                       type="date"
-                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500"
+                      class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-gray-100"
                     />
                   </div>
                 </div>
@@ -282,11 +282,11 @@ function formatPrice(price: number) {
 
             <!-- Notes -->
             <div class="mt-6">
-              <label class="block text-sm font-medium text-gray-700 mb-1">Bemerkungen (optional)</label>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Bemerkungen (optional)</label>
               <textarea
                 v-model="form.bemerkungen"
                 rows="3"
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500"
+                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-gray-100 dark:placeholder-gray-400"
                 placeholder="Besondere Wünsche oder Hinweise..."
               ></textarea>
             </div>
@@ -303,11 +303,11 @@ function formatPrice(price: number) {
 
           <!-- Step 2: Payment -->
           <div v-if="step === 2" class="card p-6">
-            <h2 class="text-2xl font-bold mb-6">Zahlungsmethode</h2>
+            <h2 class="text-2xl font-bold mb-6 dark:text-gray-100">Zahlungsmethode</h2>
 
             <div class="space-y-4">
-              <label class="flex items-start p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors"
-                :class="{ 'border-primary-500 bg-primary-50': form.zahlungsmethode === 'rechnung' }"
+              <label class="flex items-start p-4 border dark:border-gray-700 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
+                :class="{ 'border-primary-500 bg-primary-50 dark:bg-primary-900/30 dark:border-primary-500': form.zahlungsmethode === 'rechnung' }"
               >
                 <input
                   v-model="form.zahlungsmethode"
@@ -316,13 +316,13 @@ function formatPrice(price: number) {
                   class="mt-1 text-primary-600"
                 />
                 <div class="ml-3">
-                  <p class="font-semibold">Rechnung</p>
-                  <p class="text-sm text-gray-600">Zahlung nach Erhalt der Rechnung per Überweisung</p>
+                  <p class="font-semibold dark:text-gray-100">Rechnung</p>
+                  <p class="text-sm text-gray-600 dark:text-gray-400">Zahlung nach Erhalt der Rechnung per Überweisung</p>
                 </div>
               </label>
 
-              <label class="flex items-start p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors"
-                :class="{ 'border-primary-500 bg-primary-50': form.zahlungsmethode === 'kreditkarte' }"
+              <label class="flex items-start p-4 border dark:border-gray-700 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
+                :class="{ 'border-primary-500 bg-primary-50 dark:bg-primary-900/30 dark:border-primary-500': form.zahlungsmethode === 'kreditkarte' }"
               >
                 <input
                   v-model="form.zahlungsmethode"
@@ -331,13 +331,13 @@ function formatPrice(price: number) {
                   class="mt-1 text-primary-600"
                 />
                 <div class="ml-3">
-                  <p class="font-semibold">Kreditkarte</p>
-                  <p class="text-sm text-gray-600">Sichere Sofortzahlung mit Visa, Mastercard oder AmEx (simuliert)</p>
+                  <p class="font-semibold dark:text-gray-100">Kreditkarte</p>
+                  <p class="text-sm text-gray-600 dark:text-gray-400">Sichere Sofortzahlung mit Visa, Mastercard oder AmEx (simuliert)</p>
                 </div>
               </label>
 
-              <label class="flex items-start p-4 border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors"
-                :class="{ 'border-primary-500 bg-primary-50': form.zahlungsmethode === 'paypal' }"
+              <label class="flex items-start p-4 border dark:border-gray-700 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
+                :class="{ 'border-primary-500 bg-primary-50 dark:bg-primary-900/30 dark:border-primary-500': form.zahlungsmethode === 'paypal' }"
               >
                 <input
                   v-model="form.zahlungsmethode"
@@ -346,8 +346,8 @@ function formatPrice(price: number) {
                   class="mt-1 text-primary-600"
                 />
                 <div class="ml-3">
-                  <p class="font-semibold">PayPal</p>
-                  <p class="text-sm text-gray-600">Schnelle Zahlung über Ihr PayPal-Konto (simuliert)</p>
+                  <p class="font-semibold dark:text-gray-100">PayPal</p>
+                  <p class="text-sm text-gray-600 dark:text-gray-400">Schnelle Zahlung über Ihr PayPal-Konto (simuliert)</p>
                 </div>
               </label>
             </div>
@@ -370,22 +370,22 @@ function formatPrice(price: number) {
 
           <!-- Step 3: Confirmation -->
           <div v-if="step === 3" class="card p-6">
-            <h2 class="text-2xl font-bold mb-6">Buchung bestätigen</h2>
+            <h2 class="text-2xl font-bold mb-6 dark:text-gray-100">Buchung bestätigen</h2>
 
             <div class="space-y-6">
               <!-- Trip Info -->
-              <div class="p-4 bg-gray-50 rounded-lg">
-                <h3 class="font-semibold mb-2">Reise</h3>
-                <p class="text-lg font-medium">{{ trip.titel }}</p>
-                <p class="text-gray-600">{{ trip.ziel }}</p>
-                <p class="text-sm text-gray-500 mt-2">{{ formatDate(trip.abfahrt_datum) }}, {{ formatTime(trip.abfahrt_zeit) }}</p>
+              <div class="p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+                <h3 class="font-semibold mb-2 dark:text-gray-100">Reise</h3>
+                <p class="text-lg font-medium dark:text-gray-100">{{ trip.titel }}</p>
+                <p class="text-gray-600 dark:text-gray-400">{{ trip.ziel }}</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">{{ formatDate(trip.abfahrt_datum) }}, {{ formatTime(trip.abfahrt_zeit) }}</p>
               </div>
 
               <!-- Travelers -->
               <div>
-                <h3 class="font-semibold mb-2">Teilnehmer</h3>
+                <h3 class="font-semibold mb-2 dark:text-gray-100">Teilnehmer</h3>
                 <ul class="space-y-1">
-                  <li v-for="(traveler, index) in allTravelers" :key="index" class="text-gray-600">
+                  <li v-for="(traveler, index) in allTravelers" :key="index" class="text-gray-600 dark:text-gray-400">
                     {{ traveler.vorname }} {{ traveler.nachname }}
                   </li>
                 </ul>
@@ -393,19 +393,19 @@ function formatPrice(price: number) {
 
               <!-- Payment Method -->
               <div>
-                <h3 class="font-semibold mb-2">Zahlungsmethode</h3>
-                <p class="text-gray-600 capitalize">{{ form.zahlungsmethode }}</p>
+                <h3 class="font-semibold mb-2 dark:text-gray-100">Zahlungsmethode</h3>
+                <p class="text-gray-600 dark:text-gray-400 capitalize">{{ form.zahlungsmethode }}</p>
               </div>
 
               <!-- Notes -->
               <div v-if="form.bemerkungen">
-                <h3 class="font-semibold mb-2">Bemerkungen</h3>
-                <p class="text-gray-600">{{ form.bemerkungen }}</p>
+                <h3 class="font-semibold mb-2 dark:text-gray-100">Bemerkungen</h3>
+                <p class="text-gray-600 dark:text-gray-400">{{ form.bemerkungen }}</p>
               </div>
 
               <!-- Agreement -->
-              <div class="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-                <p class="text-sm text-yellow-800">
+              <div class="p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
+                <p class="text-sm text-yellow-800 dark:text-yellow-300">
                   Mit der Buchung akzeptieren Sie unsere
                   <router-link :to="{ name: 'terms' }" target="_blank" class="underline">AGB</router-link>
                   und
@@ -430,17 +430,17 @@ function formatPrice(price: number) {
 
           <!-- Step 4: Success -->
           <div v-if="step === 4" class="card p-8 text-center">
-            <div class="w-20 h-20 mx-auto mb-6 bg-green-100 rounded-full flex items-center justify-center">
-              <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="w-20 h-20 mx-auto mb-6 bg-green-100 dark:bg-green-900/50 rounded-full flex items-center justify-center">
+              <svg class="w-10 h-10 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h2 class="text-2xl font-bold mb-4">Buchung erfolgreich!</h2>
-            <p class="text-gray-600 mb-2">
-              Ihre Buchungsnummer: <strong class="font-mono text-lg">{{ createdBooking?.buchungsnummer }}</strong>
+            <h2 class="text-2xl font-bold mb-4 dark:text-gray-100">Buchung erfolgreich!</h2>
+            <p class="text-gray-600 dark:text-gray-400 mb-2">
+              Ihre Buchungsnummer: <strong class="font-mono text-lg dark:text-gray-100">{{ createdBooking?.buchungsnummer }}</strong>
             </p>
-            <p class="text-gray-600 mb-6">
-              Eine Bestätigung wurde an <strong>{{ authStore.user?.email }}</strong> gesendet.
+            <p class="text-gray-600 dark:text-gray-400 mb-6">
+              Eine Bestätigung wurde an <strong class="dark:text-gray-100">{{ authStore.user?.email }}</strong> gesendet.
             </p>
             <div class="flex flex-col sm:flex-row gap-3 justify-center">
               <router-link :to="{ name: 'booking-detail', params: { id: createdBooking?.id } }" class="btn btn-primary">
@@ -456,29 +456,29 @@ function formatPrice(price: number) {
         <!-- Sidebar -->
         <div v-if="step < 4" class="lg:col-span-1">
           <div class="card p-6 sticky top-4">
-            <h3 class="font-semibold mb-4">Zusammenfassung</h3>
+            <h3 class="font-semibold mb-4 dark:text-gray-100">Zusammenfassung</h3>
 
             <!-- Trip -->
-            <div class="mb-4 pb-4 border-b">
-              <p class="font-medium">{{ trip.titel }}</p>
-              <p class="text-sm text-gray-600">{{ trip.ziel }}</p>
-              <p class="text-sm text-gray-500 mt-1">{{ formatDate(trip.abfahrt_datum) }}</p>
+            <div class="mb-4 pb-4 border-b dark:border-gray-700">
+              <p class="font-medium dark:text-gray-100">{{ trip.titel }}</p>
+              <p class="text-sm text-gray-600 dark:text-gray-400">{{ trip.ziel }}</p>
+              <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">{{ formatDate(trip.abfahrt_datum) }}</p>
             </div>
 
             <!-- Price -->
             <div class="space-y-2 mb-4">
               <div class="flex justify-between text-sm">
-                <span class="text-gray-600">{{ form.anzahl_personen }}x Teilnehmer</span>
-                <span>{{ formatPrice(trip.preis_pro_person * form.anzahl_personen) }}</span>
+                <span class="text-gray-600 dark:text-gray-400">{{ form.anzahl_personen }}x Teilnehmer</span>
+                <span class="dark:text-gray-100">{{ formatPrice(trip.preis_pro_person * form.anzahl_personen) }}</span>
               </div>
             </div>
 
-            <div class="border-t pt-4">
+            <div class="border-t dark:border-gray-700 pt-4">
               <div class="flex justify-between text-xl font-bold">
-                <span>Gesamt</span>
-                <span class="text-primary-600">{{ formatPrice(totalPrice) }}</span>
+                <span class="dark:text-gray-100">Gesamt</span>
+                <span class="text-primary-600 dark:text-primary-400">{{ formatPrice(totalPrice) }}</span>
               </div>
-              <p class="text-sm text-gray-500 mt-1">inkl. MwSt.</p>
+              <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">inkl. MwSt.</p>
             </div>
           </div>
         </div>
