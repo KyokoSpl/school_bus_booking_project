@@ -1,0 +1,3 @@
+2f3593f63b22d9d6316eccf6b87f7fac7e5a497aadafd7201c10e0493feecd28  BusBooker Pro-1.0.0-1.x86_64.rpm
+aa3692fea1a58b7f9c3adc00213a56fa4668be57c5e8478d66a74dd046a38699  BusBooker Pro_1.0.0_amd64.deb
+1d484d748f331d168dbe4acb995559b2a5911ef35afb4ca1cb6ddbbda9807c09  BusBooker-Pro_1.0.0_x86_64-setup.exe

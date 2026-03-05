@@ -9,6 +9,7 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DESKTOP_MODE=false
 
 echo -e "${BLUE}╔═══════════════════════════════════════════════════════════╗${NC}"
 echo -e "${BLUE}║         BusBooker Pro - Development Environment          ║${NC}"
@@ -198,6 +199,19 @@ start_frontend() {
     echo -e "${GREEN}✓ Frontend gestartet (PID: $FRONTEND_PID)${NC}"
 }
 
+# Desktop-App starten (Tauri)
+start_desktop() {
+    echo ""
+    echo -e "${YELLOW}Starte Desktop-App (Tauri)...${NC}"
+    
+    cd "$PROJECT_DIR/frontend"
+    npm run tauri:dev &
+    FRONTEND_PID=$!
+    
+    sleep 3
+    echo -e "${GREEN}✓ Desktop-App gestartet (PID: $FRONTEND_PID)${NC}"
+}
+
 # Hauptprogramm
 main() {
     check_dependencies
@@ -205,13 +219,22 @@ main() {
     setup_backend_env
     setup_frontend
     start_backend
-    start_frontend
+
+    if $DESKTOP_MODE; then
+        start_desktop
+    else
+        start_frontend
+    fi
     
     echo ""
     echo -e "${GREEN}╔═══════════════════════════════════════════════════════════╗${NC}"
     echo -e "${GREEN}║              Entwicklungsumgebung bereit!                 ║${NC}"
     echo -e "${GREEN}╠═══════════════════════════════════════════════════════════╣${NC}"
+    if $DESKTOP_MODE; then
+    echo -e "${GREEN}║  Modus:     ${BLUE}Desktop (Tauri)${GREEN}                             ║${NC}"
+    else
     echo -e "${GREEN}║  Frontend:  ${BLUE}http://localhost:5173${GREEN}                       ║${NC}"
+    fi
     echo -e "${GREEN}║  Backend:   ${BLUE}http://localhost:8080${GREEN}                       ║${NC}"
     echo -e "${GREEN}║  Adminer:   ${BLUE}http://localhost:8081${GREEN}                       ║${NC}"
     echo -e "${GREEN}╠═══════════════════════════════════════════════════════════╣${NC}"
@@ -233,6 +256,10 @@ main() {
 
 # Script-Argumente verarbeiten
 case "${1:-}" in
+    --desktop|desktop)
+        DESKTOP_MODE=true
+        main
+        ;;
     db|database)
         check_dependencies
         start_database
@@ -254,6 +281,17 @@ case "${1:-}" in
         COMPOSE_CMD=$(get_docker_compose_cmd)
         cd "$PROJECT_DIR"
         $COMPOSE_CMD logs -f
+        ;;
+    --help|-h)
+        echo -e "${BLUE}Verwendung:${NC} ./dev.sh [OPTION]"
+        echo ""
+        echo -e "  ${GREEN}(keine)${NC}        Web-Frontend starten (Vite)"
+        echo -e "  ${GREEN}--desktop${NC}      Desktop-App starten (Tauri)"
+        echo -e "  ${GREEN}db${NC}             Nur Datenbank starten"
+        echo -e "  ${GREEN}stop${NC}           Docker Container stoppen"
+        echo -e "  ${GREEN}reset-db${NC}       Datenbank zurücksetzen"
+        echo -e "  ${GREEN}logs${NC}           Docker Logs anzeigen"
+        echo -e "  ${GREEN}--help${NC}         Diese Hilfe anzeigen"
         ;;
     *)
         main

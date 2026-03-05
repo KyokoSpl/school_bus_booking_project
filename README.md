@@ -42,98 +42,225 @@ school_bus_booking_project/
 └── doc/                  # Dokumentation
 ```
 
-## Schnellstart (Empfohlen)
+## Voraussetzungen
+
+| Software | Version | Download |
+|----------|---------|----------|
+| Docker | latest | https://docs.docker.com/get-docker/ |
+| Rust | 1.75+ | https://rustup.rs |
+| Node.js | 20+ | https://nodejs.org |
+
+### Zusätzliche Abhängigkeiten für die Desktop-App (Tauri)
+
+<details>
+<summary><strong>Linux (Debian/Ubuntu)</strong></summary>
 
 ```bash
-# Alles automatisch starten
+sudo apt install libgtk-3-dev libwebkit2gtk-4.1-dev libappindicator3-dev \
+  librsvg2-dev patchelf libssl-dev libayatana-appindicator3-dev
+```
+</details>
+
+<details>
+<summary><strong>Linux (Arch)</strong></summary>
+
+```bash
+sudo pacman -S --needed webkit2gtk-4.1 gtk3 libappindicator-gtk3 librsvg patchelf
+```
+</details>
+
+<details>
+<summary><strong>Linux (Fedora)</strong></summary>
+
+```bash
+sudo dnf install webkit2gtk4.1-devel gtk3-devel libappindicator-gtk3-devel \
+  librsvg2-devel patchelf openssl-devel
+```
+</details>
+
+<details>
+<summary><strong>Windows</strong></summary>
+
+- [Visual Studio Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/) mit "Desktop-Entwicklung mit C++"
+- WebView2 (vorinstalliert auf Windows 10/11)
+</details>
+
+---
+
+## Schnellstart (nur Linux)
+
+```bash
+# Web-Frontend + Backend starten
 ./dev.sh
+
+# Desktop-App + Backend starten
+./dev.sh --desktop
 ```
 
-Das Script:
-1. ✅ Startet MariaDB in Docker
-2. ✅ Wartet auf Datenbank-Bereitschaft
-3. ✅ Erstellt `.env` falls nicht vorhanden
-4. ✅ Installiert npm packages falls nötig
-5. ✅ Startet Backend (Rust)
-6. ✅ Startet Frontend (Vite)
+Das Script startet automatisch MariaDB (Docker), Backend (Rust) und Frontend (Vite oder Tauri).
 
-**URLs nach dem Start:**
-- Frontend: http://localhost:5173
-- Backend API: http://localhost:8080
-- Adminer (DB-GUI): http://localhost:8081
-
-### Weitere Befehle
+**Weitere Befehle:**
 
 ```bash
 ./dev.sh db        # Nur Datenbank starten
 ./dev.sh stop      # Docker Container stoppen
 ./dev.sh reset-db  # Datenbank zurücksetzen (löscht alle Daten!)
 ./dev.sh logs      # Docker Logs anzeigen
+./dev.sh --help    # Alle Optionen anzeigen
 ```
+
+**URLs nach dem Start:**
+- Frontend: http://localhost:5173
+- Backend API: http://localhost:8080
+- Adminer (DB-GUI): http://localhost:8081
+
+---
 
 ## Manuelles Setup
 
-### Voraussetzungen
+### 1. Datenbank starten
 
-- **Docker** - https://docs.docker.com/get-docker/
-- **Rust** (1.75+) - https://rustup.rs
-- **Node.js** (20+) - https://nodejs.org
-- **Tauri CLI** Voraussetzungen (für Desktop-App):
-  - Linux: `sudo apt install libgtk-3-dev libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf`
-  - macOS: Xcode Command Line Tools
-  - Windows: Visual Studio Build Tools, WebView2
-
-### 1. Datenbank starten (Docker)
+<details>
+<summary><strong>Linux</strong></summary>
 
 ```bash
-docker-compose up -d db
+docker compose up -d db
 
 # Warte auf Bereitschaft
-docker-compose logs -f db
+docker compose logs -f db
 ```
+</details>
+
+<details>
+<summary><strong>Windows (PowerShell)</strong></summary>
+
+```powershell
+docker compose up -d db
+
+# Warte auf Bereitschaft
+docker compose logs -f db
+```
+</details>
 
 Die Migrationen werden automatisch beim ersten Start ausgeführt.
 
-### 2. Backend einrichten
+### 2. Backend starten
+
+<details>
+<summary><strong>Linux</strong></summary>
 
 ```bash
 cd backend
 
-# .env Datei erstellen
+# .env Datei erstellen (nur beim ersten Mal)
 cp .env.example .env
-# Bearbeiten Sie .env bei Bedarf
 
 # Backend starten
 cargo run
 ```
+</details>
+
+<details>
+<summary><strong>Windows (PowerShell)</strong></summary>
+
+```powershell
+cd backend
+
+# .env Datei erstellen (nur beim ersten Mal)
+Copy-Item .env.example .env
+
+# Backend starten
+cargo run
+```
+</details>
 
 Das Backend läuft unter http://localhost:8080
 
-### 3. Frontend einrichten
+### 3. Frontend starten (Web / Entwicklungsmodus)
+
+<details>
+<summary><strong>Linux</strong></summary>
 
 ```bash
 cd frontend
-
-# Dependencies installieren
 npm install
-
-# Entwicklungsserver starten
 npm run dev
 ```
+</details>
+
+<details>
+<summary><strong>Windows (PowerShell)</strong></summary>
+
+```powershell
+cd frontend
+npm install
+npm run dev
+```
+</details>
 
 Das Frontend läuft unter http://localhost:5173
 
-### 4. Desktop-App bauen (optional)
+### 4. Desktop-App starten (Tauri / Entwicklungsmodus)
+
+<details>
+<summary><strong>Linux</strong></summary>
 
 ```bash
 cd frontend
-
-# Tauri-App im Entwicklungsmodus
+npm install
 npm run tauri:dev
+```
+</details>
 
-# Produktions-Build erstellen
+<details>
+<summary><strong>Windows (PowerShell)</strong></summary>
+
+```powershell
+cd frontend
+npm install
+npm run tauri:dev
+```
+</details>
+
+---
+
+## Installierbare Pakete bauen
+
+### Linux (.deb / .rpm / .exe Cross-Compile)
+
+Das mitgelieferte Build-Script erkennt die Distribution automatisch und installiert fehlende Abhängigkeiten:
+
+```bash
+# .deb Paket (Debian/Ubuntu)
+./build-release.sh --deb
+
+# .rpm Paket (Fedora/RHEL)
+./build-release.sh --rpm
+
+# Windows .exe (Cross-Compile von Linux)
+./build-release.sh --exe
+
+# Alle Formate
+./build-release.sh --all
+
+# Alle Formate + GitHub Release
+./build-release.sh --all --release --tag v1.0.0
+
+# Optionen anzeigen
+./build-release.sh --help
+```
+
+Artefakte werden in `release-artifacts/` abgelegt.
+
+### Windows (nativ)
+
+```powershell
+cd frontend
+npm install
 npm run tauri:build
 ```
+
+Dies erstellt einen NSIS-Installer (`.exe`) und ein MSI-Paket unter `frontend/src-tauri/target/release/bundle/`.
 
 ## Standard-Zugangsdaten
 
