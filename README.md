@@ -87,7 +87,9 @@ sudo dnf install webkit2gtk4.1-devel gtk3-devel libappindicator-gtk3-devel \
 
 ---
 
-## Schnellstart (nur Linux)
+## Schnellstart
+
+### Linux
 
 ```bash
 # Web-Frontend + Backend starten
@@ -97,22 +99,48 @@ sudo dnf install webkit2gtk4.1-devel gtk3-devel libappindicator-gtk3-devel \
 ./dev.sh --desktop
 ```
 
-Das Script startet automatisch MariaDB (Docker), Backend (Rust) und Frontend (Vite oder Tauri).
+### Windows
 
-**Weitere Befehle:**
-
-```bash
-./dev.sh db        # Nur Datenbank starten
-./dev.sh stop      # Docker Container stoppen
-./dev.sh reset-db  # Datenbank zurücksetzen (löscht alle Daten!)
-./dev.sh logs      # Docker Logs anzeigen
-./dev.sh --help    # Alle Optionen anzeigen
+```cmd
+dev.bat
 ```
 
+Beide Scripts starten automatisch MariaDB (Docker), Backend (Rust) und Frontend (Vite).
+`dev.bat` prüft ob Docker, Rust und Node.js installiert sind und bietet an, fehlende Tools via `winget` zu installieren.
+
+<details>
+<summary><strong>dev.sh Befehle (Linux)</strong></summary>
+
+```bash
+./dev.sh              # Web-Frontend + Backend starten
+./dev.sh --desktop    # Desktop-App (Tauri) + Backend starten
+./dev.sh db           # Nur Datenbank starten
+./dev.sh stop         # Docker Container stoppen
+./dev.sh reset-db     # Datenbank zurücksetzen (löscht alle Daten!)
+./dev.sh logs         # Docker Logs anzeigen
+./dev.sh --help       # Alle Optionen anzeigen
+```
+</details>
+
+<details>
+<summary><strong>dev.bat Befehle (Windows)</strong></summary>
+
+```cmd
+dev.bat               &:: Web-Frontend + Backend starten
+dev.bat db            &:: Nur Datenbank starten
+dev.bat stop          &:: Docker Container stoppen
+dev.bat reset-db      &:: Datenbank zurücksetzen (löscht alle Daten!)
+dev.bat --help        &:: Alle Optionen anzeigen
+```
+</details>
+
 **URLs nach dem Start:**
-- Frontend: http://localhost:5173
-- Backend API: http://localhost:8080
-- Adminer (DB-GUI): http://localhost:8081
+
+| Dienst    | URL                          |
+|-----------|------------------------------|
+| Frontend  | http://localhost:5173        |
+| Backend   | http://localhost:8080        |
+| Adminer   | http://localhost:8081        |
 
 ---
 
@@ -240,7 +268,10 @@ Das mitgelieferte Build-Script erkennt die Distribution automatisch und installi
 # Windows .exe (Cross-Compile von Linux)
 ./build-release.sh --exe
 
-# Alle Formate
+# Standalone Backend-Binaries (Linux + Windows)
+./build-release.sh --backend
+
+# Alle Formate (Tauri .deb/.rpm/.exe + Backend-Binaries)
 ./build-release.sh --all
 
 # Alle Formate + GitHub Release

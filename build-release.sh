@@ -22,6 +22,7 @@ NC='\033[0m'
 BUILD_DEB=false
 BUILD_RPM=false
 BUILD_EXE=false
+BUILD_BACKEND=false
 BUILD_ALL=false
 CREATE_RELEASE=false
 RELEASE_TAG=""
@@ -37,6 +38,7 @@ PKG_MANAGER=""   # pacman | apt | dnf
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 FRONTEND_DIR="$SCRIPT_DIR/frontend"
 TAURI_DIR="$FRONTEND_DIR/src-tauri"
+BACKEND_DIR="$SCRIPT_DIR/backend"
 OUTPUT_DIR="$SCRIPT_DIR/release-artifacts"
 
 # ── Versionsinfo aus tauri.conf.json ─────────────────────────
@@ -57,6 +59,7 @@ ${YELLOW}Build-Optionen:${NC}
     --deb               .deb-Paket erstellen (Debian/Ubuntu)
     --rpm               .rpm-Paket erstellen (Fedora/RHEL)
     --exe               .exe erstellen (Windows, Cross-Compile)
+    --backend           Standalone Backend-Binary erstellen (Linux + Windows)
     --all               Alle Formate erstellen
     --skip-frontend     Frontend-Build überspringen (nutzt vorherigen)
 
@@ -86,6 +89,9 @@ ${YELLOW}Beispiele:${NC}
     # Nur .exe (Cross-Compile von Linux nach Windows)
     ./build-release.sh --exe
 
+    # Nur Backend-Binaries (Linux + Windows)
+    ./build-release.sh --backend
+
 EOF
     exit 0
 }
@@ -96,6 +102,7 @@ while [[ $# -gt 0 ]]; do
         --deb)          BUILD_DEB=true ;;
         --rpm)          BUILD_RPM=true ;;
         --exe)          BUILD_EXE=true ;;
+        --backend)      BUILD_BACKEND=true ;;
         --all)          BUILD_ALL=true ;;
         --release)      CREATE_RELEASE=true ;;
         --tag)          RELEASE_TAG="$2"; shift ;;
@@ -120,12 +127,13 @@ if $BUILD_ALL; then
     BUILD_DEB=true
     BUILD_RPM=true
     BUILD_EXE=true
+    BUILD_BACKEND=true
 fi
 
 # Prüfen ob mindestens ein Build-Ziel gewählt wurde
-if ! $BUILD_DEB && ! $BUILD_RPM && ! $BUILD_EXE; then
+if ! $BUILD_DEB && ! $BUILD_RPM && ! $BUILD_EXE && ! $BUILD_BACKEND; then
     echo -e "${RED}Fehler: Kein Build-Ziel angegeben.${NC}"
-    echo "Nutze --deb, --rpm, --exe oder --all"
+    echo "Nutze --deb, --rpm, --exe, --backend oder --all"
     echo "Nutze --help für Hilfe."
     exit 1
 fi
@@ -329,7 +337,7 @@ install_system_deps() {
     fi
 
     # ── Windows Cross-Compile ─────────────────────────────────
-    if $BUILD_EXE; then
+    if $BUILD_EXE || $BUILD_BACKEND; then
         log_info "Windows Cross-Compile Abhängigkeiten prüfen..."
 
         # MinGW Compiler
@@ -508,6 +516,55 @@ build_windows() {
     fi
 }
 
+# ── Backend Binary (Linux native) ────────────────────────────
+build_backend_linux() {
+    if ! $BUILD_BACKEND; then return; fi
+
+    log_step "Backend Binary bauen (Linux)"
+    cd "$BACKEND_DIR"
+
+    log_info "cargo build --release..."
+    cargo build --release 2>&1 | if $VERBOSE; then cat; else tail -5; fi
+
+    local bin_path="$BACKEND_DIR/target/release/busbooker-api"
+    if [[ -f "$bin_path" ]]; then
+        local dest_name="busbooker-api_${APP_VERSION}_linux_amd64"
+        cp "$bin_path" "$OUTPUT_DIR/$dest_name"
+        chmod +x "$OUTPUT_DIR/$dest_name"
+        log "Backend Binary erstellt → $dest_name"
+    else
+        log_err "Backend Binary nicht gefunden"
+    fi
+}
+
+# ── Backend Binary (Windows cross-compile) ───────────────────
+build_backend_windows() {
+    if ! $BUILD_BACKEND; then return; fi
+
+    log_step "Backend Binary bauen (Windows Cross-Compile)"
+    cd "$BACKEND_DIR"
+
+    # Sicherstellen, dass das Target installiert ist
+    if ! rustup target list --installed 2>/dev/null | grep -q "x86_64-pc-windows-gnu"; then
+        log_info "Installiere Rust Windows-Target..."
+        rustup target add x86_64-pc-windows-gnu
+    fi
+
+    export CARGO_TARGET_X86_64_PC_WINDOWS_GNU_LINKER="x86_64-w64-mingw32-gcc"
+
+    log_info "Cross-compile Backend → x86_64-pc-windows-gnu..."
+    cargo build --release --target x86_64-pc-windows-gnu 2>&1 | if $VERBOSE; then cat; else tail -5; fi
+
+    local exe_path="$BACKEND_DIR/target/x86_64-pc-windows-gnu/release/busbooker-api.exe"
+    if [[ -f "$exe_path" ]]; then
+        local dest_name="busbooker-api_${APP_VERSION}_windows_amd64.exe"
+        cp "$exe_path" "$OUTPUT_DIR/$dest_name"
+        log "Backend Windows Binary erstellt → $dest_name"
+    else
+        log_err "Backend Windows Binary nicht gefunden"
+    fi
+}
+
 # ── Artefakte zusammenfassen ─────────────────────────────────
 show_artifacts() {
     log_step "Erstellte Artefakte"
@@ -532,7 +589,17 @@ show_artifacts() {
             deb)      echo -e "    ${GREEN}📦 $basename${NC} ($human_size) [Debian/Ubuntu]" ;;
             rpm)      echo -e "    ${GREEN}📦 $basename${NC} ($human_size) [Fedora/RHEL]" ;;
             exe)      echo -e "    ${GREEN}🪟 $basename${NC} ($human_size) [Windows]" ;;
-            *)        echo -e "    ${GREEN}📄 $basename${NC} ($human_size)" ;;
+            *)        if [[ "$basename" == busbooker-api_* ]]; then
+                          if [[ "$basename" == *linux* ]]; then
+                              echo -e "    ${GREEN}🐧 $basename${NC} ($human_size) [Linux Backend]"
+                          elif [[ "$basename" == *windows* ]]; then
+                              echo -e "    ${GREEN}🪟 $basename${NC} ($human_size) [Windows Backend]"
+                          else
+                              echo -e "    ${GREEN}📄 $basename${NC} ($human_size)"
+                          fi
+                      else
+                          echo -e "    ${GREEN}📄 $basename${NC} ($human_size)"
+                      fi ;;
         esac
         total_size=$((total_size + size))
     done < <(find "$OUTPUT_DIR" -type f | sort)
@@ -645,6 +712,7 @@ main() {
     $BUILD_DEB && targets+=("deb")
     $BUILD_RPM && targets+=("rpm")
     $BUILD_EXE && targets+=("exe")
+    $BUILD_BACKEND && targets+=("backend")
     log_info "Ziele: ${targets[*]}"
     $CREATE_RELEASE && log_info "GitHub Release: Ja"
 
@@ -658,6 +726,8 @@ main() {
     build_linux
     build_rpm
     build_windows
+    build_backend_linux
+    build_backend_windows
     generate_checksums
     show_artifacts
     create_github_release
