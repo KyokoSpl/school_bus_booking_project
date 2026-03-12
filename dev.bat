@@ -8,6 +8,9 @@ title BusBooker Pro - Development Environment
 :: Startet MariaDB (Docker), Backend (Rust) und Frontend (Vite)
 :: ============================================================
 
+:: Ins Projektverzeichnis wechseln (wichtig bei "Als Admin ausfuehren")
+cd /d "%~dp0"
+
 echo ╔═══════════════════════════════════════════════════════════╗
 echo ║         BusBooker Pro - Development Environment          ║
 echo ╚═══════════════════════════════════════════════════════════╝
@@ -31,6 +34,7 @@ call :setup_backend_env
 call :setup_frontend
 call :start_all
 
+pause
 goto :eof
 
 :: ── Hilfefunktion ───────────────────────────────────────────
@@ -42,6 +46,7 @@ echo   db             Nur Datenbank starten
 echo   stop           Docker Container stoppen
 echo   reset-db       Datenbank zuruecksetzen (Daten loeschen)
 echo   --help         Diese Hilfe anzeigen
+pause
 goto :eof
 
 :: ── Abhängigkeiten prüfen ───────────────────────────────────
@@ -236,6 +241,7 @@ call :start_database
 if errorlevel 1 goto :eof
 echo.
 echo [OK] Datenbank laeuft. Adminer: http://localhost:8081
+pause
 goto :eof
 
 :: ── Docker stoppen ──────────────────────────────────────────
@@ -243,6 +249,7 @@ goto :eof
 echo [*] Stoppe Docker Container...
 docker compose down
 echo [OK] Docker Container gestoppt
+pause
 goto :eof
 
 :: ── Datenbank zurücksetzen ──────────────────────────────────
@@ -250,4 +257,5 @@ goto :eof
 echo [*] Setze Datenbank zurueck...
 docker compose down -v
 echo [OK] Datenbank-Volume geloescht. Starte neu mit: dev.bat
+pause
 goto :eof
